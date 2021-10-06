@@ -7,8 +7,27 @@ import Preloader from '../components/Preloader';
 import Trending from '../components/Trending';
 import Header from '../components/Header';
 
-const Home = () => {
+import { makeStyles } from '@material-ui/core/styles';
+import {Container, Grid, Typography} from '@material-ui/core';
+import { useMediaQuery } from "@material-ui/core";
 
+const useStyles = makeStyles(theme => ({
+    container: {
+        padding: 0,
+        overflow: 'hidden',
+        border: '1px solid blue',
+      },
+    textColor : {
+        color: theme.palette.primary.main
+    }
+}))
+
+const Home = ({handleLightOrDark, lightOrDark}) => {
+
+    const classes = useStyles();
+    const isMobile = useMediaQuery(theme => theme.breakpoints.down("sm"));
+    const isLaptop = useMediaQuery(theme => theme.breakpoints.down("md"));
+  
     const { coins, getCoins, loading, error } = useStore();
     const [url, setUrl] = useState('');
     const [filter, setFilter] = useState('')
@@ -18,7 +37,7 @@ const Home = () => {
     }, [url]);
 
     return (
-        <div>
+        <Container maxWidth={isMobile ? 'sm' : isLaptop ? 'lg' : 'xl'} className={classes.container}>
             <Header/>
             <Filter setFilter={setFilter} setUrl={setUrl}/>
             {loading ? (
@@ -32,7 +51,7 @@ const Home = () => {
                     </>
                 )
             }
-        </div>
+        </Container>
     )
 }
 
