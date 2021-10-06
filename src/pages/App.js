@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import CryptoList from '../components/CryptoList';
+import Home from './Home';
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
       <Route 
         path='/'
         render={(props) => (
-          <CryptoList {...props}/>
+          <Home {...props}/>
         )}
       />
         </Switch>
