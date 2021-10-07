@@ -53,15 +53,23 @@ code {
   border-collapse: collapse;
 }
 
+/* .table tbody td {
+  border: 1px solid red;
+  padding: 5px 0px 5px 5px;
+  background-color: white;
+} */
+
 .table tbody tr:nth-of-type(odd) {
-  background-color: #f4f4f4;
+  background-color: #edeef4;
 }
+
+.table tbody tr {
+  border-bottom: 10px solid white;
+}
+
 .table td,
 .table th {
   text-align: left;
-  border: 0.1rem solid #e4e4e4;
-  padding: 0.5rem;
-}
-.table button {
-  margin: 0 0.2rem;
+  /* border: 0.1rem solid #e4e4e4; */
+  padding: .5rem;
 }
