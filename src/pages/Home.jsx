@@ -37,7 +37,7 @@ const Home = ({handleLightOrDark, lightOrDark}) => {
     }, [url]);
 
     return (
-        <Container maxWidth={isMobile ? 'sm' : isLaptop ? 'lg' : 'xl'} className={classes.container}>
+        <Container className={classes.container}>
             <Header/>
             <Filter setFilter={setFilter} setUrl={setUrl}/>
             {loading ? (
