@@ -1,14 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import { 
     InputLabel,
     MenuItem,
     FormControl,
     Select
-} from '@material-ui/core';
-
+} from '@mui/material';
 
 const Filter = (props) => {
-
+    const ref = useRef();
     const {currency, setCurrency} = props;
 
     const handleChange = (event) => {
@@ -19,14 +18,13 @@ const Filter = (props) => {
         <FormControl style={{minWidth: '10%' }}>
         <InputLabel id="demo-simple-select-helper-label">Currency</InputLabel>
         <Select
+        
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
           value={currency}
           label="Currency"
           onChange={handleChange}
         >
-          <MenuItem value="">
-          </MenuItem>
           <MenuItem value={'AUD'}>AUD</MenuItem>
           <MenuItem value={'USD'}>USD</MenuItem>
           <MenuItem value={'EUR'}>EUR</MenuItem>

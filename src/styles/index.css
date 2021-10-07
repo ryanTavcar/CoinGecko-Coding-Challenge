@@ -73,3 +73,38 @@ code {
   /* border: 0.1rem solid #e4e4e4; */
   padding: .5rem;
 }
+
+.container {
+  overflow: hidden;
+}
+
+.item {
+  position: absolute;
+  width: 100px;
+  background: #edeef4;
+  /* text-align: center; */
+}
+
+.item:nth-child(6n + 1) {
+  height: 250px;
+}
+
+.item:nth-child(6n + 2) {
+  height: 300px;
+}
+
+.item:nth-child(6n + 3) {
+  height: 160px;
+}
+
+.item:nth-child(6n + 4) {
+  height: 250px;
+}
+
+.item:nth-child(6n + 5) {
+  height: 200px;
+}
+
+.item:nth-child(6n + 6) {
+  height: 170px;
+}
