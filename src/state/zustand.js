@@ -10,7 +10,6 @@ export const useMarket = create((set) => (
         getCoins: async (url) => {
             try {
                 const {data} = await axios.get(url);
-                console.log('data', data)
                 set({coins: data, loading: false})
 
             } catch (error) {

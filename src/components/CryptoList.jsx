@@ -6,6 +6,7 @@ import Alert from './Alert';
 import Preloader from './Preloader';
 import Pagination from './Pagination';
 import Filter from './Filter';
+import { handleLargeNumbers } from '../util/helper/helperFuctions';
 
 const PAGE_SIZE = 10;
 
@@ -14,41 +15,23 @@ const CryptoList = () => {
   const { coins, getCoins, loading, error } = useMarket();
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [currency, setCurrency] = useState('AUD');
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PAGE_SIZE;
     const lastPageIndex = firstPageIndex + PAGE_SIZE;
-    console.log('coins', coins)
+
     return coins.slice(firstPageIndex, lastPageIndex);
   });
 
-  const formatPrice = new Intl.NumberFormat();
-  const handleLargeNumbers = (value) => {
-
-    const number = String(value)
-
-    switch (true) {
-      case number.length >= 13:
-      console.log(number)
-        return formatPrice.format(number).slice(0,5) + ' T';
-      case number.length >= 10:
-        return formatPrice.format(number).slice(0,5) + ' B';
-      case number.length >= 7: 
-      return formatPrice.format(number).slice(0,5) + ' M';
-      default:
-        return number
-    }
-  };
-
   useEffect(() => {
-    getCoins('https://api.coingecko.com/api/v3/coins/markets?vs_currency=aud&order=market_cap_desc&per_page=100&page=1&sparkline=false')
-    console.log('useEffect', coins)
-  }, []);
+    getCoins(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
+  }, [currency]);
 
   return (
     <>
     <h1 className="card-title">All cyrptocurrencies</h1>
-    <Filter/>
+    <Filter currency={currency} setCurrency={setCurrency}/>
     {loading ? (
         <Preloader />
         ) : error ? (
@@ -82,13 +65,13 @@ const CryptoList = () => {
                     <td >
                     <Grid container alignItems="center" >
                       <Grid item>
-                        ${formatPrice.format(crypto.current_price)}
+                        $ {crypto.current_price.toLocaleString()}
                       </Grid>
                     </Grid>
                     </td>
-                    <td>${handleLargeNumbers(crypto.market_cap)}</td>
-                    <td>${handleLargeNumbers(crypto.total_volume)}</td>
-                    <td>${handleLargeNumbers(crypto.circulating_supply)} {crypto.symbol}</td>
+                    <td>$ {handleLargeNumbers(crypto.market_cap)}</td>
+                    <td>$ {handleLargeNumbers(crypto.total_volume)}</td>
+                    <td>$ {handleLargeNumbers(crypto.circulating_supply)} {crypto.symbol}</td>
                     <td>{crypto.symbol}</td>
                     </tr>
                     ))}
