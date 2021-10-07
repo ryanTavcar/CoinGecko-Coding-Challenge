@@ -10,7 +10,7 @@ import Header from '../components/Header';
 import { makeStyles } from '@material-ui/core/styles';
 import {Container, Grid, Typography} from '@material-ui/core';
 import { useMediaQuery } from "@material-ui/core";
-import MobileCryptoList from '../components/MobileCryptoList';
+import MobileCryptoList from '../components/MosaicCryptoList';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -33,12 +33,13 @@ const Home = ({handleLightOrDark, lightOrDark}) => {
 
     return (
         <Container maxWidth={isMobile ? 'sm' : isLaptop ? 'md' : 'lg'} className={classes.container}>
-            { <Trending/>}
-            {isMobile ? 
-                <MobileCryptoList/>
-            :
+            <Grid item style={{paddingTop: '50px'}}>
+                <Trending/>
+            </Grid>
+
+            <Grid item style={{paddingTop: '50px'}}>
                 <CryptoList/>
-            }
+            </Grid>
             
             
         </Container>
