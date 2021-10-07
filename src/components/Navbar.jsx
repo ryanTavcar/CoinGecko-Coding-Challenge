@@ -23,7 +23,7 @@ import {
 const menuItems = [
     {
         text: 'Cyrptocurrencies',
-        pathname: '/products'
+        pathname: '/'
     },
     {
         text: 'About',

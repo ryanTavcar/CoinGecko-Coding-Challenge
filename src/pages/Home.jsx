@@ -28,30 +28,15 @@ const Home = ({handleLightOrDark, lightOrDark}) => {
     const isMobile = useMediaQuery(theme => theme.breakpoints.down("sm"));
     const isLaptop = useMediaQuery(theme => theme.breakpoints.down("md"));
   
-    const { coins, getCoins, loading, error } = useStore();
-    const [url, setUrl] = useState('https://api.coingecko.com/api/v3/search/trending');
-    const [filter, setFilter] = useState('trending')
-
-    useEffect(() => {
-        getCoins(url)
-    }, [url]);
+    // const [filter, setFilter] = useState('trending')
 
     return (
         <Container maxWidth={isMobile ? 'sm' : isLaptop ? 'md' : 'lg'} className={classes.container}>
-            {/* <Trending data={coins}/> */}
-            {/* <Header/> */}
-            {/* <Filter setFilter={setFilter} setUrl={setUrl}/> */}
-            {loading ? (
-                <Preloader />
-                ) : error ? (
-                    <Alert variant='danger'>{error}</Alert>
-                ) : (
-                    <>
-                        {/* {filter === 'all' && <CryptoList data={coins}/>} */}
-                        {filter  === 'trending' && <Trending data={coins}/>}
-                    </>
-                )
-            }
+            { <Trending/>}
+
+            {<CryptoList/>}
+            
+            
         </Container>
     )
 }
