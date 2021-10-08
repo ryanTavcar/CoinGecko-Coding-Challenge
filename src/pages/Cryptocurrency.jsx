@@ -15,8 +15,10 @@ const Cryptocurrency = () => {
     const { coin, getCoin, loading, error } = useCoinInfo()
 
     useEffect(() => {
-        if (!coin || id !== coin.id) {
-            getCoin(`https://api.coingecko.com/api/v3/coins/${id}`)
+        if (!coin || loading) {
+            getCoin(
+                `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=aud&days=1&interval=1m`
+            )
         }
     }, [coin, id, pathname])
 
@@ -30,10 +32,7 @@ const Cryptocurrency = () => {
                 <>
                     {coin && (
                         <>
-                            <h4>{coin.id}</h4>
-                            <div>{coin.description.en}</div>
-                            <h4>{coin.symbol}</h4>
-                            <img src={coin.image.small} alt="coin" />
+                            <p>test</p>
                         </>
                     )}
                 </>
