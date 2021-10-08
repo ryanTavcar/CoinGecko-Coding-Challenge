@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const Charts = () => {
-  return <div>chart here</div>;
-};
+    return <div>chart here</div>
+}
 
-export default Charts;
+export default Charts
