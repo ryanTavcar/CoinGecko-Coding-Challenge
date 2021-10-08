@@ -1,49 +1,49 @@
-import React, {useState, useEffect} from 'react';
-import {useStore} from '../state/zustand';
-import CryptoList from '../components/CryptoList';
-import Filter from '../components/Filter';
-import Alert from '../components/Alert';
-import Preloader from '../components/Preloader';
-import Trending from '../components/Trending';
-import Header from '../components/Header';
+import React, { useState, useEffect } from "react";
+import { useStore } from "../state/zustand";
+import CryptoList from "../components/CryptoList";
+import Filter from "../components/Filter";
+import Alert from "../components/Alert";
+import Preloader from "../components/Preloader";
+import Trending from "../components/Trending";
+import Header from "../components/Header";
 
-import { makeStyles } from '@material-ui/core/styles';
-import {Container, Grid, Typography} from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
+import { Container, Grid, Typography } from "@material-ui/core";
 import { useMediaQuery } from "@material-ui/core";
-import MobileCryptoList from '../components/MosaicCryptoList';
+import MobileCryptoList from "../components/MosaicCryptoList";
 
-const useStyles = makeStyles(theme => ({
-    container: {
-        padding: 0,
-        overflow: 'hidden',
-        // border: '1px solid blue',
-      },
-    textColor : {
-        color: theme.palette.primary.main
-    }
-}))
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: 0,
+    overflow: "hidden",
+    // border: '1px solid blue',
+  },
+  textColor: {
+    color: theme.palette.primary.main,
+  },
+}));
 
-const Home = ({handleLightOrDark, lightOrDark}) => {
+const Home = ({ handleLightOrDark, lightOrDark }) => {
+  const classes = useStyles();
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
+  const isLaptop = useMediaQuery((theme) => theme.breakpoints.down("md"));
 
-    const classes = useStyles();
-    const isMobile = useMediaQuery(theme => theme.breakpoints.down("sm"));
-    const isLaptop = useMediaQuery(theme => theme.breakpoints.down("md"));
-  
-    // const [filter, setFilter] = useState('trending')
+  // const [filter, setFilter] = useState('trending')
 
-    return (
-        <Container maxWidth={isMobile ? 'sm' : isLaptop ? 'md' : 'lg'} className={classes.container}>
-            <Grid item style={{paddingTop: '50px'}}>
-                <Trending/>
-            </Grid>
+  return (
+    <Container
+      maxWidth={isMobile ? "sm" : isLaptop ? "md" : "lg"}
+      className={classes.container}
+    >
+      <Grid item style={{ paddingTop: "50px" }}>
+        <Trending />
+      </Grid>
 
-            <Grid item style={{paddingTop: '50px'}}>
-                <CryptoList/>
-            </Grid>
-            
-            
-        </Container>
-    )
-}
+      <Grid item style={{ paddingTop: "50px" }}>
+        <CryptoList />
+      </Grid>
+    </Container>
+  );
+};
 
-export default Home
+export default Home;

@@ -1,0 +1,7 @@
+# Ignore artifacts:
+
+# testing
+/coverage
+
+# production
+/build

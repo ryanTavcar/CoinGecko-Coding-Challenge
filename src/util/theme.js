@@ -1,20 +1,17 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from "@material-ui/core/styles";
 
 // Create a theme instance.
 const lightTheme = createTheme({
   palette: {
-    type: 'light',
+    type: "light",
     primary: {
-      light: '#D9F5FF',
-      main: '#03a9f4',
-      dark: '#0276aa',
-    }
+      light: "#D9F5FF",
+      main: "#03a9f4",
+      dark: "#0276aa",
+    },
   },
   typography: {
-    fontFamily: [
-      'Prompt', 
-      'sans-serif'
-    ].join(',')
+    fontFamily: ["Prompt", "sans-serif"].join(","),
   },
   breakpoints: {
     values: {
@@ -24,25 +21,21 @@ const lightTheme = createTheme({
       lg: 1280,
       xl: 1920,
     },
-  }
+  },
 });
 
 const darkTheme = createTheme({
   palette: {
-    type: 'dark',
+    type: "dark",
     primary: {
-      light: '#D9F5FF',
-      main: '#03a9f4',
-      dark: '#0276aa',
-    }
+      light: "#D9F5FF",
+      main: "#03a9f4",
+      dark: "#0276aa",
+    },
   },
   typography: {
-    fontFamily: [
-      'Prompt', 
-      'sans-serif'
-    ].join(',')
-  }
+    fontFamily: ["Prompt", "sans-serif"].join(","),
+  },
 });
 
-export {lightTheme, darkTheme};
-  
+export { lightTheme, darkTheme };
