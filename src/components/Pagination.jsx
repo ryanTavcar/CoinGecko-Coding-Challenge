@@ -1,6 +1,7 @@
-import React, {useMemo } from 'react';
+import React from 'react';
 import { usePagination, DOTS } from '../util/helper/usePagination';
 import clsx from 'clsx';
+// import Slider from '@mui/material/Slider';
 import '../styles/pagination.css';
 
 const Pagination = props => {
@@ -10,7 +11,7 @@ const Pagination = props => {
       siblingCount = 1,
       currentPage,
       pageSize,
-      className
+      className,
     } = props;
   
     const paginationRange = usePagination({
@@ -19,32 +20,31 @@ const Pagination = props => {
       siblingCount,
       pageSize
     });
-  
+    
+    let lastPage = paginationRange[paginationRange.length - 1];
+
     // If there are less than 2 times in pagination range we shall not render the component
     if (currentPage === 0 || paginationRange.length < 2) {
       return null;
     }
   
     const onNext = () => {
-      onPageChange(currentPage + 1);
+        onPageChange(currentPage + 1);
     };
   
     const onPrevious = () => {
-      onPageChange(currentPage - 1);
+        onPageChange(currentPage - 1);
     };
-  
-    let lastPage = paginationRange[paginationRange.length - 1];
     
     return (
       <ul
         className={clsx('pagination-container', { [className]: className })}
       >
          {/* Left navigation arrow */}
-        <li
+        <li onClick={onPrevious} 
           className={clsx('pagination-item', {
-            disabled: currentPage === 1
+          disabled: currentPage === 1
           })}
-          onClick={onPrevious}
         >
           <div className="arrow left" />
         </li>

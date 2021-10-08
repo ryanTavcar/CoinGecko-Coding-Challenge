@@ -1,23 +1,28 @@
 import React, {useState, useEffect, useMemo } from 'react';
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 import {Link} from 'react-router-dom';
 import { Grid, Typography } from '@material-ui/core';
 import { handleLargeNumbers } from '../util/helper/helperFuctions';
 import Pagination from './Pagination';
 
-const PAGE_SIZE = 10;
+// const PAGE_SIZE = 10;
 
-const TableCryptoList = ({data}) => {
+const TableCryptoList = ({data, pageSize}) => {
+
+    // const classes = useStyles();
     const [currentPage, setCurrentPage] = useState(1);
 
     const currentTableData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PAGE_SIZE;
-        const lastPageIndex = firstPageIndex + PAGE_SIZE;
+        const firstPageIndex = (currentPage - 1) * pageSize;
+        const lastPageIndex = firstPageIndex + pageSize;
     
         return data.slice(firstPageIndex, lastPageIndex);
-      });
+    });
 
     return (
-        <div className="card">
+        <div className="card"
+          >
             <table className='table'>
             <thead>
                 <tr style={{borderBottom: '10px solid white'}}>
@@ -61,8 +66,9 @@ const TableCryptoList = ({data}) => {
                 className="pagination-bar"
                 currentPage={currentPage}
                 totalCount={data.length}
-                pageSize={PAGE_SIZE}
+                pageSize={pageSize}
                 onPageChange={page => setCurrentPage(page)}
+
             />
         </div>
     )
