@@ -21,6 +21,28 @@ const useStyles = makeStyles((theme) => ({
     header: {
         border: '1px solid red',
     },
+    chart: {
+        border: '1px solid blue',
+    },
+    detailsContainer: {
+        border: '1px solid purple',
+    },
+    detailItem: {
+        width: '50%',
+    },
+    list: {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 0,
+        // border: '4px solid red',
+    },
+    listItem: {
+        display: 'flex',
+        border: '1px solid black',
+        padding: 20,
+        width: '100%',
+        justifyContent: 'space-between',
+    },
 }))
 
 const Cryptocurrency = () => {
@@ -59,7 +81,7 @@ const Cryptocurrency = () => {
         }
     }, [coin, id, pathname])
 
-    console.log(coin)
+    // console.log(coin)
 
     return (
         <>
@@ -71,8 +93,160 @@ const Cryptocurrency = () => {
                 <>
                     {prices && chartData && (
                         <>
-                            <Grid container direction="column">
+                            <Grid
+                                container
+                                direction="row"
+                                style={{ border: '2px solid black' }}
+                            >
                                 <Grid
+                                    item
+                                    xs={6}
+                                    style={{ border: '1px solid red' }}
+                                >
+                                    <Grid
+                                        container
+                                        style={{ border: '1px solid red' }}
+                                    >
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            style={{
+                                                border: '1px solid orange',
+                                            }}
+                                        >
+                                            $
+                                            {coin.market_data.current_price.aud}{' '}
+                                            aud
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            style={{
+                                                border: '1px solid orange',
+                                            }}
+                                        >
+                                            <Line
+                                                data={chartData}
+                                                options={{
+                                                    plugins: {
+                                                        title: {
+                                                            display: true,
+                                                            text: `${id} prices`,
+                                                        },
+                                                        legend: {
+                                                            display: true,
+                                                            position: 'bottom',
+                                                        },
+                                                    },
+                                                }}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    item
+                                    xs={6}
+                                    style={{ border: '1px solid green' }}
+                                >
+                                    <Grid
+                                        container
+                                        direction="column"
+                                        alignItems="center"
+                                        className={classes.detailsContainer}
+                                    >
+                                        <Grid
+                                            item
+                                            xs={6}
+                                            className={classes.detailItem}
+                                        >
+                                            <Paper>
+                                                <ul className={classes.list}>
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+                                                </ul>
+                                            </Paper>
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            xs={6}
+                                            className={classes.detailItem}
+                                        >
+                                            <Paper>
+                                                <ul className={classes.list}>
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+
+                                                    <li
+                                                        className={
+                                                            classes.listItem
+                                                        }
+                                                    >
+                                                        <h6>open</h6>
+                                                        <h6>13.101.48</h6>
+                                                    </li>
+                                                </ul>
+                                            </Paper>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                {/* <Grid
                                     container
                                     direction="row"
                                     className={classes.container}
@@ -85,33 +259,60 @@ const Cryptocurrency = () => {
                                         ${coin.market_data.current_price.aud}{' '}
                                         aud
                                     </Grid>
-                                    <Grid item xs={6}>
-                                        <Paper>container</Paper>
+                                    <Grid
+                                        item
+                                        xs={6}
+                                        className={classes.detailsContainer}
+                                    >
+                                        <Grid container direction="column">
+                                            <Grid item>
+                                                <Paper>
+                                                    <ul>
+                                                        <li>info1</li>
+                                                        <li>info2</li>
+                                                        <li>info3</li>
+                                                        <li>info4</li>
+                                                    </ul>
+                                                </Paper>
+                                            </Grid>
+                                            <Grid item>
+                                                <Paper>
+                                                    <ul>
+                                                        <li>info1</li>
+                                                        <li>info2</li>
+                                                        <li>info3</li>
+                                                        <li>info4</li>
+                                                    </ul>
+                                                </Paper>
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid
-                                    container
-                                    direction="column"
-                                    // justifyContent="flex-end"
-                                >
-                                    <Grid item xs={6}>
-                                        <Line
-                                            data={chartData}
-                                            options={{
-                                                plugins: {
-                                                    title: {
-                                                        display: true,
-                                                        text: `${id} prices`,
+                                <Grid item xs={6}>
+                                    <Grid
+                                        container
+                                        direction="column"
+                                        className={classes.chart}
+                                    >
+                                        <Grid item xs={12}>
+                                            <Line
+                                                data={chartData}
+                                                options={{
+                                                    plugins: {
+                                                        title: {
+                                                            display: true,
+                                                            text: `${id} prices`,
+                                                        },
+                                                        legend: {
+                                                            display: true,
+                                                            position: 'bottom',
+                                                        },
                                                     },
-                                                    legend: {
-                                                        display: true,
-                                                        position: 'bottom',
-                                                    },
-                                                },
-                                            }}
-                                        />
+                                                }}
+                                            />
+                                        </Grid>
                                     </Grid>
-                                </Grid>
+                                </Grid> */}
                             </Grid>
                         </>
                     )}
