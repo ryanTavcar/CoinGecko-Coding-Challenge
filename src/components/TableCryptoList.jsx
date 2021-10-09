@@ -9,7 +9,6 @@ import Pagination from './Pagination'
 // const PAGE_SIZE = 10;
 
 const TableCryptoList = ({ data, pageSize }) => {
-    // const classes = useStyles();
     const [currentPage, setCurrentPage] = useState(1)
 
     const currentTableData = useMemo(() => {
@@ -20,7 +19,7 @@ const TableCryptoList = ({ data, pageSize }) => {
     })
 
     return (
-        <div className="card">
+        <div>
             <table className="table">
                 <thead>
                     <tr style={{ borderBottom: '10px solid white' }}>

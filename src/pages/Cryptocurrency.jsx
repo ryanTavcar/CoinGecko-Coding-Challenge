@@ -7,10 +7,13 @@ import { useCoinInfo } from '../state/zustand'
 // COMPONENTS
 import Preloader from '../components/Preloader'
 import Alert from '../components/Alert'
-import { Line } from 'react-chartjs-2'
+import { Line, Area } from 'react-chartjs-2'
+import BoxList from '../components/BoxList'
+
 // MATERIAL-UI
 import { Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import { useMediaQuery } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -19,29 +22,23 @@ const useStyles = makeStyles((theme) => ({
         // border: '1px solid blue',
     },
     header: {
-        border: '1px solid red',
+        // border: '1px solid red',
     },
     chart: {
-        border: '1px solid blue',
+        // border: '1px solid blue',
     },
     detailsContainer: {
-        border: '1px solid purple',
+        // border: '1px solid blue',
+        height: '100%',
     },
     detailItem: {
-        width: '50%',
-    },
-    list: {
-        display: 'flex',
-        flexDirection: 'column',
-        padding: 0,
-        // border: '4px solid red',
-    },
-    listItem: {
-        display: 'flex',
-        border: '1px solid black',
-        padding: 20,
-        width: '100%',
-        justifyContent: 'space-between',
+        // border: '1px solid red',
+        minWidth: '18rem',
+        maxHeight: '10rem',
+        [theme.breakpoints.down('md')]: {
+            maxHeight: '40rem',
+            height: '16rem',
+        },
     },
 }))
 
@@ -51,38 +48,67 @@ const Cryptocurrency = () => {
     const { pathname } = useLocation()
     const { coin, getPrices, getCoin, prices, loading, error } = useCoinInfo()
 
-    const [chartData, setChartData] = useState({})
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
 
     useEffect(() => {
-        if (!coin || loading) {
-            console.log('here')
+        if (!coin || coin.id !== id || loading) {
             getPrices(
                 `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=aud&days=30&interval=daily`
             )
             getCoin(`https://api.coingecko.com/api/v3/coins/${id}`)
         }
-        if (prices && !loading) {
-            let data = { index: [], price: [] }
-            for (const item of prices.prices) {
-                data.index.push(item[0])
-                data.price.push(item[1])
-            }
-
-            setChartData({
-                labels: data.index.map((t) => new Date(t).toLocaleDateString()),
-                datasets: [
-                    {
-                        label: 'Price in AUD',
-                        data: data.price.map((crypto) => crypto),
-                        backgroundColor: ['#ffbb11'],
-                    },
-                ],
-            })
-        }
     }, [coin, id, pathname])
 
-    // console.log(coin)
+    const chartData = (canvas) => {
+        const ctx = canvas.getContext('2d')
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+        gradient.addColorStop(0.5, 'rgba(46, 139, 192, 1)')
+        gradient.addColorStop(1, 'rgba(46, 139, 192, .4)')
 
+        let data = { index: [], price: [] }
+        for (const item of prices.prices) {
+            data.index.push(item[0])
+            data.price.push(item[1])
+        }
+
+        return {
+            labels: data.index.map((t) => new Date(t).toLocaleDateString()),
+            datasets: [
+                {
+                    label: 'Price in AUD',
+                    data: data.price.map((crypto) => crypto),
+                    fill: 'start',
+                    backgroundColor: gradient,
+                    borderColor: '#145DA0',
+                    borderWidth: 2,
+                    pointColor: '#fff',
+                    pointStrokeColor: '#ff6c23',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: '#ff6c23',
+                },
+            ],
+        }
+    }
+
+    const options = {
+        responsive: true,
+        maintainAspectRatio: true,
+        elements: {
+            point: {
+                radius: 0,
+            },
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltips: {
+                enabled: false,
+            },
+        },
+    }
+
+    console.log(coin)
     return (
         <>
             {loading ? (
@@ -95,224 +121,145 @@ const Cryptocurrency = () => {
                         <>
                             <Grid
                                 container
-                                direction="row"
-                                style={{ border: '2px solid black' }}
+                                direction={isMobile ? 'column' : 'row'}
+                                className={classes.container}
+                                style={{
+                                    // border: '2px solid black',
+                                    padding: 60,
+                                }}
                             >
                                 <Grid
                                     item
-                                    xs={6}
-                                    style={{ border: '1px solid red' }}
+                                    xs={12}
+                                    md={9}
+                                    // style={{ border: '1px solid red' }}
                                 >
                                     <Grid
                                         container
-                                        style={{ border: '1px solid red' }}
+                                        item
+                                        xs={6}
+                                        alignItems="center"
+                                        style={{
+                                            // border: '1px solid red',
+                                            marginBottom: 20,
+                                        }}
                                     >
+                                        <img
+                                            src={coin.image.thumb}
+                                            width="40"
+                                        />
+                                        <Typography style={{ marginLeft: 10 }}>
+                                            {coin.name}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid
+                                        container
+                                        style={
+                                            {
+                                                // border: '1px solid red',
+                                                // marginBottom: 20,
+                                            }
+                                        }
+                                    >
+                                        {/* HEADER */}
                                         <Grid
                                             item
                                             xs={12}
                                             style={{
-                                                border: '1px solid orange',
+                                                // border: '1px solid orange',
+                                                marginBottom: 20,
                                             }}
                                         >
-                                            $
-                                            {coin.market_data.current_price.aud}{' '}
-                                            aud
+                                            <Grid
+                                                container
+                                                // style={{ marginBottom: 20 }}
+                                            >
+                                                <Grid item>
+                                                    <Typography variant="h3">
+                                                        {`$ ${coin.market_data.current_price.aud} `}
+                                                    </Typography>
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    style={{ paddingLeft: 10 }}
+                                                >
+                                                    <Typography variant="h6">
+                                                        AUD
+                                                    </Typography>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                xs={12}
+                                                style={{
+                                                    // border: '1px solid orange',
+                                                    color: 'green',
+                                                }}
+                                            >
+                                                +1009.28 (+7.53%)
+                                            </Grid>
                                         </Grid>
+
+                                        {/* LINE CHART */}
                                         <Grid
                                             item
                                             xs={12}
-                                            style={{
-                                                border: '1px solid orange',
-                                            }}
+                                            style={
+                                                {
+                                                    // border: '1px solid orange',
+                                                    // height: 570,
+                                                    // maxWidth: 1140,
+                                                }
+                                            }
                                         >
                                             <Line
+                                                // height={'570px'}
+                                                // width={'1140px'}
                                                 data={chartData}
-                                                options={{
-                                                    plugins: {
-                                                        title: {
-                                                            display: true,
-                                                            text: `${id} prices`,
-                                                        },
-                                                        legend: {
-                                                            display: true,
-                                                            position: 'bottom',
-                                                        },
-                                                    },
-                                                }}
+                                                options={options}
                                             />
                                         </Grid>
                                     </Grid>
                                 </Grid>
                                 <Grid
                                     item
-                                    xs={6}
-                                    style={{ border: '1px solid green' }}
+                                    xs={12}
+                                    md={3}
+                                    style={
+                                        {
+                                            // border: '1px solid blue',
+                                        }
+                                    }
                                 >
                                     <Grid
                                         container
-                                        direction="column"
+                                        direction={isMobile ? 'row' : 'column'}
+                                        justifyContent="space-evenly"
                                         alignItems="center"
                                         className={classes.detailsContainer}
                                     >
+                                        {/* DETAILS */}
                                         <Grid
                                             item
-                                            xs={6}
+                                            xs={4}
+                                            md={6}
                                             className={classes.detailItem}
                                         >
-                                            <Paper>
-                                                <ul className={classes.list}>
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-                                                </ul>
-                                            </Paper>
+                                            <BoxList data={coin} />
                                         </Grid>
                                         <Grid
                                             item
-                                            xs={6}
+                                            xs={4}
+                                            md={6}
                                             className={classes.detailItem}
                                         >
-                                            <Paper>
-                                                <ul className={classes.list}>
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-
-                                                    <li
-                                                        className={
-                                                            classes.listItem
-                                                        }
-                                                    >
-                                                        <h6>open</h6>
-                                                        <h6>13.101.48</h6>
-                                                    </li>
-                                                </ul>
-                                            </Paper>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                {/* <Grid
-                                    container
-                                    direction="row"
-                                    className={classes.container}
-                                >
-                                    <Grid
-                                        item
-                                        xs={6}
-                                        className={classes.header}
-                                    >
-                                        ${coin.market_data.current_price.aud}{' '}
-                                        aud
-                                    </Grid>
-                                    <Grid
-                                        item
-                                        xs={6}
-                                        className={classes.detailsContainer}
-                                    >
-                                        <Grid container direction="column">
-                                            <Grid item>
-                                                <Paper>
-                                                    <ul>
-                                                        <li>info1</li>
-                                                        <li>info2</li>
-                                                        <li>info3</li>
-                                                        <li>info4</li>
-                                                    </ul>
-                                                </Paper>
-                                            </Grid>
-                                            <Grid item>
-                                                <Paper>
-                                                    <ul>
-                                                        <li>info1</li>
-                                                        <li>info2</li>
-                                                        <li>info3</li>
-                                                        <li>info4</li>
-                                                    </ul>
-                                                </Paper>
-                                            </Grid>
-                                        </Grid>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <Grid
-                                        container
-                                        direction="column"
-                                        className={classes.chart}
-                                    >
-                                        <Grid item xs={12}>
-                                            <Line
-                                                data={chartData}
-                                                options={{
-                                                    plugins: {
-                                                        title: {
-                                                            display: true,
-                                                            text: `${id} prices`,
-                                                        },
-                                                        legend: {
-                                                            display: true,
-                                                            position: 'bottom',
-                                                        },
-                                                    },
-                                                }}
+                                            <BoxList
+                                                marketOrder={true}
+                                                data={coin}
                                             />
                                         </Grid>
                                     </Grid>
-                                </Grid> */}
+                                </Grid>
                             </Grid>
                         </>
                     )}

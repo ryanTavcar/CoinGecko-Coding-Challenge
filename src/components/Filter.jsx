@@ -1,9 +1,16 @@
 import React, { useState, useRef } from 'react'
-import { InputLabel, MenuItem, FormControl, Select } from '@mui/material'
+import {
+    InputLabel,
+    MenuItem,
+    FormControl,
+    Select,
+    TextField,
+} from '@mui/material'
 
 const Filter = (props) => {
     const ref = useRef()
-    const { currency, setCurrency, pageSize, setPageSize } = props
+    const { currency, setCurrency, pageSize, setPageSize, search, setSearch } =
+        props
 
     const handleCurrencyChange = (event) => {
         setCurrency(event.target.value)
@@ -13,8 +20,21 @@ const Filter = (props) => {
         setPageSize(event.target.value)
     }
 
+    const handleSearchChange = (event) => {
+        setSearch(event.target.value)
+    }
+
     return (
         <>
+            <TextField
+                style={{ width: '50%' }}
+                id="outlined-search"
+                value={search}
+                onChange={handleSearchChange}
+                type="text"
+                color="secondary"
+            />
+
             <FormControl style={{ minWidth: '10%' }}>
                 <InputLabel id="page-size-select">Size</InputLabel>
                 <Select
