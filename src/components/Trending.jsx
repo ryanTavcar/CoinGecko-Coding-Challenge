@@ -1,11 +1,19 @@
+// REACT
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+
+// MATERIAL-UI
 import { makeStyles } from '@material-ui/core/styles'
-import { useTrending } from '../state/zustand'
-import Preloader from './Preloader'
-import Alert from './Alert'
 import { Container, Grid, Paper, Typography } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
+
+// COMPONENTS
+import Preloader from './Preloader'
+import Alert from './Alert'
+import { Line } from 'react-chartjs-2'
+
+// OTHER
+import { useTrending, useCoinInfo } from '../state/zustand'
 import linechart from '../images/linechart_demo.jpg'
 
 const useStyles = makeStyles((theme) => ({
@@ -62,11 +70,95 @@ const useStyles = makeStyles((theme) => ({
 
 const Trending = () => {
     const classes = useStyles()
-    const { getCoins, coins, loading, error } = useTrending()
+    const { getCoins, coins, getPrices, prices, loading, error } = useTrending()
+    // const { coin, getPrices, getCoin, prices } = useCoinInfo()
 
     useEffect(() => {
-        getCoins('https://api.coingecko.com/api/v3/search/trending')
-    }, [])
+        if (!coins || loading) {
+            getCoins('https://api.coingecko.com/api/v3/search/trending')
+        }
+        if (coins && !loading) {
+            coins.coins.map((item) => {
+                const id = item.item.id
+                getPrices(
+                    `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=aud&days=30&interval=daily`
+                )
+                // console.log(item.item.id)d
+            })
+
+            // getCoin(`https://api.coingecko.com/api/v3/coins/${}`)
+        }
+    }, [coins])
+
+    const chartData = (canvas) => {
+        // console.log(price)
+        if (prices) {
+            const ctx = canvas.getContext('2d')
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+            gradient.addColorStop(0.5, 'rgba(46, 139, 192, 1)')
+            gradient.addColorStop(1, 'rgba(46, 139, 192, .4)')
+
+            let data = { index: [], pricedata: [] }
+            for (const item of prices.prices) {
+                data.index.push(item[0])
+                data.pricedata.push(item[1])
+            }
+
+            return {
+                labels: data.index.map((t) => new Date(t).toLocaleDateString()),
+                datasets: [
+                    {
+                        label: 'Price in AUD',
+                        data: data.pricedata.map((crypto) => crypto),
+                        fill: 'start',
+                        backgroundColor: gradient,
+                        borderColor: '#145DA0',
+                        borderWidth: 2,
+                        pointColor: '#fff',
+                        pointStrokeColor: '#ff6c23',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: '#ff6c23',
+                    },
+                ],
+            }
+        }
+    }
+
+    const options = {
+        responsive: true,
+        maintainAspectRatio: true,
+
+        scales: {
+            yAxes: [
+                {
+                    display: false,
+                },
+            ],
+            xAxes: [
+                {
+                    ticks: {
+                        display: false,
+                    },
+                },
+            ],
+        },
+        elements: {
+            point: {
+                radius: 0,
+            },
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            tooltips: {
+                enabled: false,
+            },
+        },
+    }
+
+    // console.log(coins)
+    // console.log(prices)
 
     return (
         <>
@@ -115,12 +207,19 @@ const Trending = () => {
                                         </Typography>
                                     </Grid>
                                     <Grid item xs={6} className={classes.graph}>
-                                        <img
+                                        {/* <img
                                             src={linechart}
                                             width="100%"
                                             height="60"
                                             alt="demo linechart"
-                                        />
+                                        /> */}
+                                        {prices && prices.prices && (
+                                            // prices.map((price) => (
+                                            <Line
+                                                data={chartData}
+                                                options={options}
+                                            />
+                                        )}
                                     </Grid>
                                 </Grid>
                             </Paper>

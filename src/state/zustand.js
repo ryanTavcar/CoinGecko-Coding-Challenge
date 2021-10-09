@@ -56,6 +56,8 @@ export const useCoinInfo = create((set) => ({
 
 export const useTrending = create((set) => ({
     coins: [],
+    coin: [],
+    prices: [],
     loading: true,
     error: null,
     getCoins: async (url) => {
@@ -68,6 +70,18 @@ export const useTrending = create((set) => ({
                     ? error.response.data.message
                     : error.message
             set({ loading: false, error: message })
+        }
+    },
+    getPrices: async (url) => {
+        try {
+            const { data } = await axios.get(url)
+            set({ prices: data })
+        } catch (error) {
+            const message =
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+            set({ error: message })
         }
     },
     resetCoins: () => {

@@ -163,10 +163,17 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
                                 container
                                 direction="row"
                                 alignItems="center"
-                                justifyContent="space-evenly"
+                                justifyContent="center"
                             >
                                 {menuItems.map((item) => (
-                                    <Grid item key={item.text}>
+                                    <Grid
+                                        item
+                                        key={item.text}
+                                        style={{
+                                            marginLeft: 15,
+                                            marginRight: 15,
+                                        }}
+                                    >
                                         <Link
                                             to={item.pathname}
                                             className={styles.navlink}
