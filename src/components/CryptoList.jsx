@@ -49,27 +49,34 @@ const CryptoList = () => {
 
     useEffect(() => {
         console.log('here')
-        if (!coins || loading) {
+        if (!coins || currency) {
             getCoins(
                 `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
             )
         }
 
+        // if (coins && !loading) {
+        //     setData(coins)
+        // }
+    }, [currency])
+
+    useEffect(() => {
         if (coins && !loading) {
             setData(coins)
         }
-    }, [currency, coins])
 
-    useEffect(() => {
-        console.log(search.length)
         if (search.length === 0) {
             setData(coins)
         } else {
-            const filter = coins.filter((coin) => coin.symbol.includes(search))
-            console.log(filter)
+            const filter = coins.filter((coin) => {
+                return Object.values(coin)
+                    .join(' ')
+                    .toLowerCase()
+                    .match(search.toLowerCase())
+            })
             setData(filter)
         }
-    }, [search])
+    }, [search, coins])
 
     return (
         <>
@@ -86,7 +93,7 @@ const CryptoList = () => {
                 <Grid
                     item
                     container
-                    justifyContent="flex-end"
+                    justifyContent="space-between"
                     className={classes.filterContainer}
                 >
                     <Filter
