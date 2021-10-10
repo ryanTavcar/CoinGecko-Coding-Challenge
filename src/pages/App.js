@@ -34,24 +34,24 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles()
-    const [theme, setTheme] = useState(lightTheme)
-    const [lightOrDark, setLightOrDark] = useState('light')
+    // const [theme, setTheme] = useState(lightTheme)
+    // const [lightOrDark, setLightOrDark] = useState('light')
 
-    const handleLightOrDark = (event) => {
-        const colorMode = lightOrDark === 'light' ? 'dark' : 'light'
-        setLightOrDark(colorMode)
+    // const handleLightOrDark = (event) => {
+    //     const colorMode = lightOrDark === 'light' ? 'dark' : 'light'
+    //     setLightOrDark(colorMode)
 
-        const colorTheme = theme === lightTheme ? darkTheme : lightTheme
-        setTheme(colorTheme)
-    }
+    //     const colorTheme = theme === lightTheme ? darkTheme : lightTheme
+    //     setTheme(colorTheme)
+    // }
 
     return (
-        <ThemeProvider theme={{ ...theme }}>
+        <ThemeProvider theme={lightTheme}>
             <CssBaseline />
             <Router>
                 <Navbar
-                    lightOrDark={lightOrDark}
-                    handleLightOrDark={handleLightOrDark}
+                // lightOrDark={lightOrDark}
+                // handleLightOrDark={handleLightOrDark}
                 />
                 <Switch>
                     <Route

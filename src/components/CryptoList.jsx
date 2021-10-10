@@ -113,15 +113,16 @@ const CryptoList = () => {
                         ) : (
                             <>
                                 <Grid
-                                    container
-                                    // justifyContent="space-between"
-                                    className={classes.filterContainer}
+                                    item
+                                    xs={12}
+                                    style={{
+                                        border: '1px solid blue',
+                                        marginBottom: 20,
+                                    }}
                                 >
                                     <Grid
-                                        item
                                         container
                                         justifyContent="space-between"
-                                        xs={12}
                                     >
                                         <Filter
                                             currency={currency}
@@ -132,12 +133,12 @@ const CryptoList = () => {
                                             search={search}
                                         />
                                     </Grid>
-                                    <Grid item xs={12}>
-                                        <TableCryptoList
-                                            data={data}
-                                            pageSize={pageSize}
-                                        />
-                                    </Grid>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TableCryptoList
+                                        data={data}
+                                        pageSize={pageSize}
+                                    />
                                 </Grid>
                             </>
                         )}

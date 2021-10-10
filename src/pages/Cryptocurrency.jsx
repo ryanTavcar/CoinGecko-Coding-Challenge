@@ -46,15 +46,21 @@ const Cryptocurrency = () => {
     const classes = useStyles()
     const { id } = useParams()
     const { pathname } = useLocation()
-    const { coin, getPrices, getCoin, prices, loading, error } = useCoinInfo()
+    const { coin, getPrices, getCoin, prices, resetCoins, loading, error } =
+        useCoinInfo()
 
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+
+    useEffect(() => {
+        resetCoins()
+    }, [])
 
     useEffect(() => {
         if (!coin || coin.id !== id || loading) {
             getPrices(
                 `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=aud&days=30&interval=daily`
             )
+            console.log('here')
             getCoin(`https://api.coingecko.com/api/v3/coins/${id}`)
         }
     }, [coin, id, pathname])

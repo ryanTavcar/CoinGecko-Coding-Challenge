@@ -8,7 +8,8 @@
     height: 40px;
     text-align: center;
     margin: auto 8px;
-    color: rgba(0, 0, 0, 0.87);
+    color: #313f4f;
+    /* color: rgba(0, 0, 0, 0.87); */
     display: flex;
     box-sizing: border-box;
     align-items: center;
@@ -23,11 +24,12 @@
     cursor: default;
 }
 .pagination-container .pagination-item:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: #dbfb53;
     cursor: pointer;
 }
 .pagination-container .pagination-item.selected {
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: #dbfb53;
+    /* background-color: rgba(0, 0, 0, 0.08); */
 }
 .pagination-container .pagination-item .arrow::before {
     position: relative;

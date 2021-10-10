@@ -6,8 +6,11 @@ const lightTheme = createTheme({
         type: 'light',
         primary: {
             light: '#D9F5FF',
-            main: '#03a9f4',
+            main: '#DBFB53',
             dark: '#0276aa',
+        },
+        secondary: {
+            main: '#313F4F',
         },
     },
     typography: {

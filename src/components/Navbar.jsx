@@ -29,11 +29,16 @@ const menuItems = [
         text: 'About',
         pathname: '/about',
     },
+    {
+        text: 'Social',
+        pathname: '/social',
+    },
 ]
 
 const useStyles = makeStyles((theme) => ({
     navbar: {
         // border: '1px solid red'
+        backgroundColor: '#eef2e0',
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -73,11 +78,11 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     linkContainer: {
-        height: 20,
+        // height: 20,
     },
 }))
 
-const Navbar = ({ lightOrDark, handleLightOrDark }) => {
+const Navbar = () => {
     const styles = useStyles()
     const drawer = Sidebar()
     const [mobileOpen, setMobileOpen] = useState(false)
@@ -102,7 +107,8 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
 
                 <Grid
                     container
-                    justifyContent="center"
+                    justifyContent="space-between"
+                    alignItems="center"
                     className={styles.drawer}
                 >
                     {/* mobile */}
@@ -112,7 +118,7 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
                             direction="row"
                             justifyContent="flex-end"
                         >
-                            <Grid item md={4} className={styles.linkContainer}>
+                            {/* <Grid item md={4} className={styles.linkContainer}>
                                 <Grid
                                     container
                                     direction="row"
@@ -125,7 +131,7 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
                                         {lightOrDark}
                                     </Button>
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
                         <Drawer
                             container={container}
@@ -142,7 +148,7 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
 
                     {/* tablet, laptop, desktop */}
                     <Hidden smDown>
-                        <Grid item md={3} className={styles.linkContainer}>
+                        <Grid item md={2} className={styles.linkContainer}>
                             <Link to="/" className={styles.navlink}>
                                 <Typography
                                     color="textPrimary"
@@ -158,11 +164,11 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
                             </Link>
                             {/* <Image src='/images/simflight_logo_transparent_1.png' width='100' height='32' /> */}
                         </Grid>
-                        <Grid item md={6} className={styles.linkContainer}>
+                        <Grid item md={3} className={styles.linkContainer}>
                             <Grid
                                 container
                                 direction="row"
-                                alignItems="center"
+                                // alignItems="center"
                                 justifyContent="center"
                             >
                                 {menuItems.map((item) => (
@@ -189,18 +195,41 @@ const Navbar = ({ lightOrDark, handleLightOrDark }) => {
                                 ))}
                             </Grid>
                         </Grid>
-                        <Grid item md={3} className={styles.linkContainer}>
+                        <Grid item md={2} className={styles.linkContainer}>
                             <Grid
                                 container
-                                direction="row"
-                                justifyContent="flex-end"
+                                // direction="row"
+                                justifyContent="space-evenly"
+                                style={
+                                    {
+                                        // border: '1px solid red',
+                                        // width: '10rem',
+                                    }
+                                }
                             >
-                                <Button
-                                    size="small"
-                                    onClick={() => handleLightOrDark()}
-                                >
-                                    {lightOrDark}
-                                </Button>
+                                <Grid item>
+                                    <Link to="login" className={styles.navlink}>
+                                        <Typography
+                                            color="textPrimary"
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            Login
+                                        </Typography>
+                                    </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link
+                                        to="/registation"
+                                        className={styles.navlink}
+                                    >
+                                        <Typography
+                                            color="textPrimary"
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            <b>Registation</b>
+                                        </Typography>
+                                    </Link>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </Hidden>
