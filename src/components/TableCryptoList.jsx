@@ -22,7 +22,7 @@ const TableCryptoList = ({ data, pageSize }) => {
         <div>
             <table className="table">
                 <thead>
-                    <tr style={{ borderBottom: '10px solid white' }}>
+                    <tr style={{ borderBottom: '5px solid #d9dce3' }}>
                         <th>NAME</th>
                         <th>PRICE</th>
                         <th>MARKET CAP</th>

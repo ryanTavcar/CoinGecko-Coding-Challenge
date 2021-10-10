@@ -6,8 +6,25 @@ import {
     Select,
     TextField,
 } from '@mui/material'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        border:
+            theme.palette.type === 'light'
+                ? ''
+                : '1px solid ' + theme.palette.primary.main,
+    },
+    notchedOutline: {
+        border:
+            theme.palette.type === 'light'
+                ? ''
+                : '1px solid ' + theme.palette.primary.main + '!important',
+    },
+}))
 
 const Filter = (props) => {
+    const classes = useStyles()
     const ref = useRef()
     const { currency, setCurrency, pageSize, setPageSize, search, setSearch } =
         props
@@ -32,7 +49,11 @@ const Filter = (props) => {
                 value={search}
                 onChange={handleSearchChange}
                 type="text"
-                color="secondary"
+                InputProps={{
+                    classes: {
+                        notchedOutline: classes.notchedOutline,
+                    },
+                }}
             />
 
             <FormControl style={{ minWidth: '10%' }}>
@@ -43,6 +64,7 @@ const Filter = (props) => {
                     value={pageSize}
                     label="Size"
                     onChange={handlePageSize}
+                    className={classes.root}
                 >
                     <MenuItem value={5}>5</MenuItem>
                     <MenuItem value={10}>10</MenuItem>
@@ -60,6 +82,7 @@ const Filter = (props) => {
                     value={currency}
                     label="Currency"
                     onChange={handleCurrencyChange}
+                    className={classes.root}
                 >
                     <MenuItem value={'AUD'}>AUD</MenuItem>
                     <MenuItem value={'USD'}>USD</MenuItem>

@@ -75,8 +75,8 @@ const CryptoList = () => {
 
     return (
         <>
-            <Grid container direction="column" className={classes.container}>
-                <Grid item xs={12} className={classes.headingContainer}>
+            <Grid container direction="row" className={classes.container}>
+                <Grid item className={classes.headingContainer}>
                     <Typography
                         variant="subtitle1"
                         color="textPrimary"
@@ -85,21 +85,6 @@ const CryptoList = () => {
                         Browse Cyrptocurrencies
                     </Typography>
                 </Grid>
-                <Grid
-                    item
-                    container
-                    justifyContent="space-between"
-                    className={classes.filterContainer}
-                >
-                    <Filter
-                        currency={currency}
-                        setCurrency={setCurrency}
-                        pageSize={pageSize}
-                        setPageSize={setPageSize}
-                        setSearch={setSearch}
-                        search={search}
-                    />
-                </Grid>
                 {loading ? (
                     <Preloader />
                 ) : error ? (
@@ -107,9 +92,54 @@ const CryptoList = () => {
                 ) : (
                     <>
                         {isMobile ? (
-                            <MosaicCryptoList data={coins} />
+                            <>
+                                <Grid
+                                    item
+                                    container
+                                    justifyContent="space-between"
+                                    className={classes.filterContainer}
+                                >
+                                    <Filter
+                                        currency={currency}
+                                        setCurrency={setCurrency}
+                                        pageSize={pageSize}
+                                        setPageSize={setPageSize}
+                                        setSearch={setSearch}
+                                        search={search}
+                                    />
+                                </Grid>
+                                <MosaicCryptoList data={data} />
+                            </>
                         ) : (
-                            <TableCryptoList data={data} pageSize={pageSize} />
+                            <>
+                                <Grid
+                                    container
+                                    // justifyContent="space-between"
+                                    className={classes.filterContainer}
+                                >
+                                    <Grid
+                                        item
+                                        container
+                                        justifyContent="space-between"
+                                        xs={12}
+                                    >
+                                        <Filter
+                                            currency={currency}
+                                            setCurrency={setCurrency}
+                                            pageSize={pageSize}
+                                            setPageSize={setPageSize}
+                                            setSearch={setSearch}
+                                            search={search}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <TableCryptoList
+                                            data={data}
+                                            pageSize={pageSize}
+                                        />
+                                    </Grid>
+                                </Grid>
+                            </>
                         )}
                     </>
                 )}

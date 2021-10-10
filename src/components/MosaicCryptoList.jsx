@@ -12,12 +12,6 @@ import { useMediaQuery } from '@material-ui/core'
 
 const MosaicCryptoList = ({ data }) => {
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'))
-    // const { coins, getCoins, loading, error } = useMarket();
-    // const [currency, setCurrency] = useState('AUD');
-
-    // useEffect(() => {
-    //     getCoins(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`)
-    // }, [currency]);
 
     return (
         <MasonryGrid

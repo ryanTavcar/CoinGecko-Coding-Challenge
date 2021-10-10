@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Container, Grid, Typography } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
 import MobileCryptoList from '../components/MosaicCryptoList'
+import Hero from '../components/Hero'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const Home = ({ handleLightOrDark, lightOrDark }) => {
+const Home = () => {
     const classes = useStyles()
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
     const isLaptop = useMediaQuery((theme) => theme.breakpoints.down('md'))
@@ -35,12 +36,19 @@ const Home = ({ handleLightOrDark, lightOrDark }) => {
             maxWidth={isMobile ? 'sm' : isLaptop ? 'md' : 'lg'}
             className={classes.container}
         >
-            <Grid item style={{ paddingTop: '50px' }}>
-                <Trending />
-            </Grid>
+            <Hero />
+            <Grid
+                container
+                direction="column"
+                style={{ border: '1px solid red' }}
+            >
+                <Grid item xs={12} md={3}>
+                    <Trending />
+                </Grid>
 
-            <Grid item style={{ paddingTop: '50px' }}>
-                <CryptoList />
+                <Grid item xs={12} md={9}>
+                    <CryptoList />
+                </Grid>
             </Grid>
         </Container>
     )

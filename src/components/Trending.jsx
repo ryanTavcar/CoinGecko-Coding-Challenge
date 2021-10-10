@@ -18,9 +18,10 @@ import linechart from '../images/linechart_demo.jpg'
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        padding: 0,
+        padding: 10,
         overflow: 'hidden',
         // border: '1px solid blue',
+        // height: '100%',
     },
     heading: {
         fontFamily: 'Bungee',
@@ -30,11 +31,11 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         backgroundColor: '#d9dce3',
         // border: '1px solid blue',
-        display: 'inline-flex',
-        flexDirection: 'row',
-        padding: 5,
-        height: '10rem',
-        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        // padding: 5,
+        // height: '10rem',
+        // width: '100%',
         overflowX: 'scroll',
     },
     '@global': {
@@ -53,8 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
     trendingItem: {
         // border: '1px solid blue',
-        borderRadius: 10,
-        minWidth: '20rem',
+        // borderRadius: 10,
         margin: 7,
     },
     logo: {
@@ -167,7 +167,11 @@ const Trending = () => {
             ) : error ? (
                 <Alert variant="danger">{error}</Alert>
             ) : (
-                <Grid container className={classes.container}>
+                <Grid
+                    container
+                    direction="column"
+                    className={classes.container}
+                >
                     <Grid item xs={12}>
                         <Typography
                             variant="subtitle1"

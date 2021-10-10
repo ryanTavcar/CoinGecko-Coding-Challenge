@@ -53,7 +53,6 @@ function App() {
                     lightOrDark={lightOrDark}
                     handleLightOrDark={handleLightOrDark}
                 />
-
                 <Switch>
                     <Route
                         exact
