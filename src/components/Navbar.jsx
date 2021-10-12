@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu'
-
+import { useGeneralState } from '../state/zustand'
 import {
     Box,
     Drawer,
@@ -18,6 +18,7 @@ import {
     Grid,
     Button,
     AppBar,
+    Modal,
 } from '@material-ui/core'
 
 const menuItems = [
@@ -29,10 +30,10 @@ const menuItems = [
         text: 'About',
         pathname: '/about',
     },
-    {
-        text: 'Social',
-        pathname: '/social',
-    },
+    // {
+    //     text: 'Social',
+    //     pathname: '/social',
+    // },
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -85,12 +86,16 @@ const useStyles = makeStyles((theme) => ({
 const Navbar = () => {
     const styles = useStyles()
     const drawer = Sidebar()
+    const { setIsModalOpen } = useGeneralState()
     const [mobileOpen, setMobileOpen] = useState(false)
     const [container, setContainer] = useState(null)
+    const [isOpen, setisOpen] = useState(false)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
     }
+
+    const handleModalOpen = () => setIsModalOpen()
 
     return (
         <AppBar position="sticky" color="default">
@@ -168,7 +173,6 @@ const Navbar = () => {
                             <Grid
                                 container
                                 direction="row"
-                                // alignItems="center"
                                 justifyContent="center"
                             >
                                 {menuItems.map((item) => (
@@ -195,20 +199,15 @@ const Navbar = () => {
                                 ))}
                             </Grid>
                         </Grid>
+
                         <Grid item md={2} className={styles.linkContainer}>
-                            <Grid
-                                container
-                                // direction="row"
-                                justifyContent="space-evenly"
-                                style={
-                                    {
-                                        // border: '1px solid red',
-                                        // width: '10rem',
-                                    }
-                                }
-                            >
+                            <Grid container justifyContent="space-evenly">
                                 <Grid item>
-                                    <Link to="login" className={styles.navlink}>
+                                    <Link
+                                        to="/"
+                                        className={styles.navlink}
+                                        onClick={handleModalOpen}
+                                    >
                                         <Typography
                                             color="textPrimary"
                                             style={{ cursor: 'pointer' }}
@@ -219,8 +218,9 @@ const Navbar = () => {
                                 </Grid>
                                 <Grid item>
                                     <Link
-                                        to="/registation"
+                                        to="/"
                                         className={styles.navlink}
+                                        onClick={handleModalOpen}
                                     >
                                         <Typography
                                             color="textPrimary"

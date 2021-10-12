@@ -56,6 +56,7 @@ const Filter = (props) => {
                     disabled={disable}
                     id="outlined-search"
                     value={search}
+                    placeholder="search name or symbol"
                     onChange={handleSearchChange}
                     type="text"
                     InputProps={{

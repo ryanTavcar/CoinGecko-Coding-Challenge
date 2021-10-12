@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 import { Grid, Typography } from '@material-ui/core'
 import { handleLargeNumbers } from '../util/helper/helperFuctions'
 import Pagination from './Pagination'
-
+import { useMediaQuery } from '@material-ui/core'
 // const PAGE_SIZE = 10;
 
 const TableCryptoList = ({ data, pageSize }) => {
     const [currentPage, setCurrentPage] = useState(1)
-
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize
         const lastPageIndex = firstPageIndex + pageSize
@@ -40,7 +40,7 @@ const TableCryptoList = ({ data, pageSize }) => {
                                         <Grid item style={{ padding: 10 }}>
                                             <img
                                                 src={crypto.image}
-                                                width="40"
+                                                width={isMobile ? '30' : '40'}
                                                 alt={`${crypto.name} image`}
                                             />
                                         </Grid>

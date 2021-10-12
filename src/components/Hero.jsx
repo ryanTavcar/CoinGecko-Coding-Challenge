@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
         fontFamily: 'Numans',
         letterSpacing: 1,
     },
-    subtitle: {},
+    subtitle: {
+        // height: '5rem',
+        paddingTop: '3rem',
+    },
     textContainer: {
         // border: '1px solid red',
         [theme.breakpoints.down('sm')]: {
@@ -48,83 +51,58 @@ const Hero = () => {
     }
 
     return (
-        <Grid
-            component="main"
-            container
-            className={classes.container}
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-        >
-            <Grid item xs={12} md={7}>
-                <Grid
-                    container
-                    direction="column"
-                    alignItems={isMobile ? 'center' : 'flex-start'}
-                    // spacing={9}
-                    className={classes.textContainer}
-                >
-                    <Grid item component="header">
-                        <Typography
-                            className={classes.title}
-                            variant={isMobile ? 'h3' : 'h2'}
-                            component="h1"
-                        >
-                            <b>
-                                Crytograb are leaders in the cryptocurrency
-                                martket
-                            </b>
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography
-                            className={classes.subtitle}
-                            variant="subtitle2"
-                            component="h1"
-                        >
-                            browse about our Cyrptocurrencies data and view
-                            charts and details about the next up and comming
-                            crytpos!
-                        </Typography>
-                    </Grid>
-                    <Grid item onClick={scrollDown}>
-                        <div
-                            style={{
-                                // border: '1px solid red',
-                                zIndex: 1,
-                                position: 'relative',
-                                top: 70,
-                                left: 5,
-                                borderRadius: '50%',
-                                width: 50,
-                                height: 50,
-                                backgroundColor: '#DBFB53',
-                            }}
-                        ></div>
-                        <AiOutlineArrowDown
-                            style={{ position: 'relative', zIndex: 2 }}
-                            size={60}
-                        />
-                    </Grid>
-                    {/* <Grid item >
-                        <Grid container direction="row" justifyContent={isMobile ? 'center' : 'flex-start'} >
-                            {data.actions && 
-                                <Link to={data.actions[0].link}>
-                                    <Button color="primary" variant="contained" size="large">
-                                        {data.actions[0].label}
-                                        {data.actions[0].icon &&
-                                        <Grid container item xs={2} style={{marginLeft: '10px'}} >
-                                            <BiRightArrowAlt size={25} />
-                                        </Grid>
-                                        }
-                                    </Button>
-                                </Link>
-                            }
-                        </Grid>
-                    </Grid> */}
+        <Grid container className={classes.container} alignItems="center">
+            <Grid
+                item
+                xs={12}
+                md={6}
+                container
+                direction="column"
+                justifyContent="space-between"
+                className={classes.textContainer}
+            >
+                <Grid item md={12}>
+                    <Typography
+                        className={classes.title}
+                        variant={isMobile ? 'h3' : 'h2'}
+                        component="h1"
+                    >
+                        <b>
+                            Crytograb are leaders in the cryptocurrency martket
+                        </b>
+                    </Typography>
+                </Grid>
+                <Grid item md={12}>
+                    <Typography
+                        className={classes.subtitle}
+                        variant="subtitle2"
+                        component="h3"
+                    >
+                        browse about our Cyrptocurrencies data and view charts
+                        and details about the next up and comming crytpos!
+                    </Typography>
+                </Grid>
+                <Grid item onClick={scrollDown} md={12}>
+                    <div
+                        style={{
+                            // border: '1px solid red',
+                            zIndex: 1,
+                            position: 'relative',
+                            top: 70,
+                            left: 5,
+                            borderRadius: '50%',
+                            width: 50,
+                            height: 50,
+                            backgroundColor: '#DBFB53',
+                        }}
+                    ></div>
+                    <AiOutlineArrowDown
+                        style={{ position: 'relative', zIndex: 2 }}
+                        size={60}
+                    />
                 </Grid>
             </Grid>
-            <Grid item container justifyContent="center" xs={12} md={5}>
+            <Grid item container justifyContent="center" xs={12} md={6}>
                 <img
                     src={heroImage}
                     alt="header image"

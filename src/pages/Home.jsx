@@ -12,6 +12,9 @@ import { useMediaQuery } from '@material-ui/core'
 import MobileCryptoList from '../components/MosaicCryptoList'
 import Hero from '../components/Hero'
 import Menu from '../components/Menu'
+import Popup from '../components/common/Popup'
+// OTHER
+import { useGeneralState } from '../state/zustand'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -29,20 +32,24 @@ const Home = () => {
     const classes = useStyles()
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
     const isLaptop = useMediaQuery((theme) => theme.breakpoints.down('md'))
-
-    // const [filter, setFilter] = useState('trending')
+    const { isModalOpen } = useGeneralState()
 
     return (
         <Container
             maxWidth={isMobile ? 'sm' : isLaptop ? 'md' : 'lg'}
             className={classes.container}
         >
-            <Hero />
-            <Grid container direction="row" style={{ minHeight: '35rem' }}>
-                <Grid item xs={12}>
-                    <Menu />
+            {/* {isModalOpen && ( */}
+            <>
+                <Popup isOpen={isModalOpen} />
+                <Hero />
+                <Grid container direction="row" style={{ minHeight: '35rem' }}>
+                    <Grid item xs={12}>
+                        <Menu />
+                    </Grid>
                 </Grid>
-            </Grid>
+            </>
+            {/* )} */}
         </Container>
     )
 }

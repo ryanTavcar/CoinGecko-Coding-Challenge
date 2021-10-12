@@ -21,6 +21,7 @@ import Trending from './Trending'
 import { useCoinInfo } from '../state/zustand'
 import { handleLargeNumbers } from '../util/helper/helperFuctions'
 import useSearch from '../util/helper/useSearch'
+import CheckLoad from './common/CheckLoad'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -50,13 +51,6 @@ const Menu = () => {
     const [data, setData] = useState([])
     const [search, setSearch] = useState('')
 
-    // const { data, search, setSearch } = useSearch(
-    //     isMarket,
-    //     marketCoins,
-    //     loading
-    // )
-    // const [search, setSearch] = useState('')
-
     useEffect(() => {
         resetCoins()
         if ((!marketCoins && !trendingCoins) || currency) {
@@ -67,8 +61,6 @@ const Menu = () => {
         }
     }, [currency])
 
-    console.log(data)
-    console.log(marketCoins)
     // SEARCH
     useEffect(() => {
         if (isMarket && !loading) {
@@ -106,8 +98,7 @@ const Menu = () => {
                     marginBottom: 20,
                 }}
             >
-                <Grid item xs={3} md={1}>
-                    {/* <Typography>Market</Typography> */}
+                <Grid item xs={3} md={2} lg={1}>
                     <Button
                         variant="contained"
                         color="primary"
@@ -116,7 +107,7 @@ const Menu = () => {
                         Market
                     </Button>
                 </Grid>
-                <Grid item xs={1}>
+                <Grid item xs={3} md={2} lg={1}>
                     <Button
                         variant="contained"
                         color="secondary"
@@ -165,19 +156,13 @@ const Menu = () => {
                     marginBottom: 20,
                 }}
             >
-                {loading ? (
-                    <Preloader />
-                ) : error ? (
-                    <Alert variant="danger">{error}</Alert>
-                ) : (
-                    <>
-                        {isMarket ? (
-                            <TableCryptoList data={data} pageSize={pageSize} />
-                        ) : (
-                            <Trending data={trendingCoins} />
-                        )}
-                    </>
-                )}
+                <CheckLoad loading={loading} error={error}>
+                    {isMarket ? (
+                        <TableCryptoList data={data} pageSize={pageSize} />
+                    ) : (
+                        <Trending data={trendingCoins} />
+                    )}
+                </CheckLoad>
             </Grid>
         </Grid>
     )

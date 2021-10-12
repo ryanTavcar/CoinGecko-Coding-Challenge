@@ -18,6 +18,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Container, Grid, Typography } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
 
+// OTHER
+import { useGeneralState } from '../state/zustand'
+
 const useStyles = makeStyles((theme) => ({
     container: {
         padding: 0,
@@ -34,16 +37,6 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
     const classes = useStyles()
-    // const [theme, setTheme] = useState(lightTheme)
-    // const [lightOrDark, setLightOrDark] = useState('light')
-
-    // const handleLightOrDark = (event) => {
-    //     const colorMode = lightOrDark === 'light' ? 'dark' : 'light'
-    //     setLightOrDark(colorMode)
-
-    //     const colorTheme = theme === lightTheme ? darkTheme : lightTheme
-    //     setTheme(colorTheme)
-    // }
 
     return (
         <ThemeProvider theme={lightTheme}>
@@ -53,6 +46,7 @@ function App() {
                 // lightOrDark={lightOrDark}
                 // handleLightOrDark={handleLightOrDark}
                 />
+
                 <Switch>
                     <Route
                         exact

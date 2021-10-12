@@ -102,7 +102,7 @@ const BoxList = ({ marketOrder, data }) => {
                     <Grid container style={{ padding: 15 }}>
                         <Button
                             variant="contained"
-                            color="primary"
+                            color="secondary"
                             style={{ width: '100%' }}
                         >
                             <Typography

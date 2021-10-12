@@ -14,6 +14,7 @@ import BoxList from '../components/BoxList'
 import { Grid, Paper, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
+import CheckLoad from '../components/common/CheckLoad'
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -60,7 +61,6 @@ const Cryptocurrency = () => {
             getPrices(
                 `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=aud&days=30&interval=daily`
             )
-            console.log('here')
             getCoin(`https://api.coingecko.com/api/v3/coins/${id}`)
         }
     }, [coin, id, pathname])
@@ -113,7 +113,6 @@ const Cryptocurrency = () => {
             },
         },
     }
-
     console.log(coin)
     return (
         <>
@@ -272,6 +271,143 @@ const Cryptocurrency = () => {
                 </>
             )}
         </>
+        // <CheckLoad loading={loading} error={error} coin={coin}>
+        //     {coin.length > 0 && (
+        //         <Grid
+        //             container
+        //             direction={isMobile ? 'column' : 'row'}
+        //             className={classes.container}
+        //             style={{
+        //                 // border: '2px solid black',
+        //                 padding: 60,
+        //             }}
+        //         >
+        //             <Grid
+        //                 item
+        //                 xs={12}
+        //                 md={9}
+        //                 // style={{ border: '1px solid red' }}
+        //             >
+        //                 <Grid
+        //                     container
+        //                     item
+        //                     xs={6}
+        //                     alignItems="center"
+        //                     style={{
+        //                         // border: '1px solid red',
+        //                         marginBottom: 20,
+        //                     }}
+        //                 >
+        //                     <img src={coin.image.thumb} width="40" />
+        //                     <Typography style={{ marginLeft: 10 }}>
+        //                         {coin.name}
+        //                     </Typography>
+        //                 </Grid>
+        //                 <Grid
+        //                     container
+        //                     style={
+        //                         {
+        //                             // border: '1px solid red',
+        //                             // marginBottom: 20,
+        //                         }
+        //                     }
+        //                 >
+        //                     {/* HEADER */}
+        //                     <Grid
+        //                         item
+        //                         xs={12}
+        //                         style={{
+        //                             // border: '1px solid orange',
+        //                             marginBottom: 20,
+        //                         }}
+        //                     >
+        //                         <Grid
+        //                             container
+        //                             // style={{ marginBottom: 20 }}
+        //                         >
+        //                             <Grid item>
+        //                                 <Typography variant="h3">
+        //                                     {`$ ${coin.market_data.current_price.aud} `}
+        //                                 </Typography>
+        //                             </Grid>
+        //                             <Grid item style={{ paddingLeft: 10 }}>
+        //                                 <Typography variant="h6">
+        //                                     AUD
+        //                                 </Typography>
+        //                             </Grid>
+        //                         </Grid>
+        //                         <Grid
+        //                             item
+        //                             xs={12}
+        //                             style={{
+        //                                 // border: '1px solid orange',
+        //                                 color: 'green',
+        //                             }}
+        //                         >
+        //                             +1009.28 (+7.53%)
+        //                         </Grid>
+        //                     </Grid>
+
+        //                     {/* LINE CHART */}
+        //                     <Grid
+        //                         item
+        //                         xs={12}
+        //                         style={
+        //                             {
+        //                                 // border: '1px solid orange',
+        //                                 // height: 570,
+        //                                 // maxWidth: 1140,
+        //                             }
+        //                         }
+        //                     >
+        //                         <Line
+        //                             // height={'570px'}
+        //                             // width={'1140px'}
+        //                             data={chartData}
+        //                             options={options}
+        //                         />
+        //                     </Grid>
+        //                 </Grid>
+        //             </Grid>
+        //             <Grid
+        //                 item
+        //                 xs={12}
+        //                 md={3}
+        //                 style={
+        //                     {
+        //                         // border: '1px solid blue',
+        //                     }
+        //                 }
+        //             >
+        //                 <Grid
+        //                     container
+        //                     direction={isMobile ? 'row' : 'column'}
+        //                     justifyContent="space-evenly"
+        //                     alignItems="center"
+        //                     className={classes.detailsContainer}
+        //                 >
+        //                     {/* DETAILS */}
+        //                     <Grid
+        //                         item
+        //                         xs={4}
+        //                         md={6}
+        //                         className={classes.detailItem}
+        //                     >
+        //                         <BoxList data={coin} />
+        //                     </Grid>
+        //                     <Grid
+        //                         item
+        //                         xs={4}
+        //                         md={6}
+        //                         className={classes.detailItem}
+        //                     >
+        //                         <BoxList marketOrder={true} data={coin} />
+        //                     </Grid>
+        //                 </Grid>
+        //             </Grid>
+        //         </Grid>
+        //     )}
+        // </CheckLoad>
     )
 }
 
