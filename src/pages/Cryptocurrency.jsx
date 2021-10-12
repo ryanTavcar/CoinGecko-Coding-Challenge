@@ -7,7 +7,7 @@ import { useCoinInfo } from '../state/zustand'
 // COMPONENTS
 import Preloader from '../components/Preloader'
 import Alert from '../components/Alert'
-import { Line, Area } from 'react-chartjs-2'
+import LineChart from '../components/LineChart'
 import BoxList from '../components/BoxList'
 
 // MATERIAL-UI
@@ -65,55 +65,63 @@ const Cryptocurrency = () => {
         }
     }, [coin, id, pathname])
 
-    const chartData = (canvas) => {
-        const ctx = canvas.getContext('2d')
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400)
-        gradient.addColorStop(0.5, 'rgba(46, 139, 192, 1)')
-        gradient.addColorStop(1, 'rgba(46, 139, 192, .4)')
+    // let data = { index: [], price: [] }
+    // if (prices) {
+    //     for (const item of prices.prices) {
+    //         data.index.push(item[0])
+    //         data.price.push(item[1])
+    //     }
+    // }
 
-        let data = { index: [], price: [] }
-        for (const item of prices.prices) {
-            data.index.push(item[0])
-            data.price.push(item[1])
-        }
+    // const chartData = (canvas) => {
+    //     const ctx = canvas.getContext('2d')
+    //     const gradient = ctx.createLinearGradient(0, 0, 0, 400)
+    //     gradient.addColorStop(0.5, 'rgba(46, 139, 192, 1)')
+    //     gradient.addColorStop(1, 'rgba(46, 139, 192, .4)')
 
-        return {
-            labels: data.index.map((t) => new Date(t).toLocaleDateString()),
-            datasets: [
-                {
-                    label: 'Price in AUD',
-                    data: data.price.map((crypto) => crypto),
-                    fill: 'start',
-                    backgroundColor: gradient,
-                    borderColor: '#145DA0',
-                    borderWidth: 2,
-                    pointColor: '#fff',
-                    pointStrokeColor: '#ff6c23',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: '#ff6c23',
-                },
-            ],
-        }
-    }
+    //     let data = { index: [], price: [] }
+    //     for (const item of prices.prices) {
+    //         data.index.push(item[0])
+    //         data.price.push(item[1])
+    //     }
 
-    const options = {
-        responsive: true,
-        maintainAspectRatio: true,
-        elements: {
-            point: {
-                radius: 0,
-            },
-        },
-        plugins: {
-            legend: {
-                display: false,
-            },
-            tooltips: {
-                enabled: false,
-            },
-        },
-    }
-    console.log(coin)
+    //     return {
+    //         labels: data.index.map((t) => new Date(t).toLocaleDateString()),
+    //         datasets: [
+    //             {
+    //                 label: 'Price in AUD',
+    //                 data: data.price.map((crypto) => crypto),
+    //                 fill: 'start',
+    //                 backgroundColor: gradient,
+    //                 borderColor: '#145DA0',
+    //                 borderWidth: 2,
+    //                 pointColor: '#fff',
+    //                 pointStrokeColor: '#ff6c23',
+    //                 pointHighlightFill: '#fff',
+    //                 pointHighlightStroke: '#ff6c23',
+    //             },
+    //         ],
+    //     }
+    // }
+
+    // const options = {
+    //     responsive: true,
+    //     maintainAspectRatio: true,
+    //     elements: {
+    //         point: {
+    //             radius: 0,
+    //         },
+    //     },
+    //     plugins: {
+    //         legend: {
+    //             display: false,
+    //         },
+    //         tooltips: {
+    //             enabled: false,
+    //         },
+    //     },
+    // }
+
     return (
         <>
             {loading ? (
@@ -122,30 +130,23 @@ const Cryptocurrency = () => {
                 <Alert variant="danger">{error}</Alert>
             ) : (
                 <>
-                    {prices && chartData && (
+                    {prices && (
                         <>
                             <Grid
                                 container
                                 direction={isMobile ? 'column' : 'row'}
                                 className={classes.container}
                                 style={{
-                                    // border: '2px solid black',
                                     padding: 60,
                                 }}
                             >
-                                <Grid
-                                    item
-                                    xs={12}
-                                    md={9}
-                                    // style={{ border: '1px solid red' }}
-                                >
+                                <Grid item xs={12} md={9}>
                                     <Grid
                                         container
                                         item
                                         xs={6}
                                         alignItems="center"
                                         style={{
-                                            // border: '1px solid red',
                                             marginBottom: 20,
                                         }}
                                     >
@@ -157,28 +158,16 @@ const Cryptocurrency = () => {
                                             {coin.name}
                                         </Typography>
                                     </Grid>
-                                    <Grid
-                                        container
-                                        style={
-                                            {
-                                                // border: '1px solid red',
-                                                // marginBottom: 20,
-                                            }
-                                        }
-                                    >
+                                    <Grid container>
                                         {/* HEADER */}
                                         <Grid
                                             item
                                             xs={12}
                                             style={{
-                                                // border: '1px solid orange',
                                                 marginBottom: 20,
                                             }}
                                         >
-                                            <Grid
-                                                container
-                                                // style={{ marginBottom: 20 }}
-                                            >
+                                            <Grid container>
                                                 <Grid item>
                                                     <Typography variant="h3">
                                                         {`$ ${coin.market_data.current_price.aud} `}
@@ -197,7 +186,6 @@ const Cryptocurrency = () => {
                                                 item
                                                 xs={12}
                                                 style={{
-                                                    // border: '1px solid orange',
                                                     color: 'green',
                                                 }}
                                             >
@@ -206,36 +194,15 @@ const Cryptocurrency = () => {
                                         </Grid>
 
                                         {/* LINE CHART */}
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            style={
-                                                {
-                                                    // border: '1px solid orange',
-                                                    // height: 570,
-                                                    // maxWidth: 1140,
-                                                }
-                                            }
-                                        >
-                                            <Line
-                                                // height={'570px'}
-                                                // width={'1140px'}
-                                                data={chartData}
-                                                options={options}
+                                        <Grid item xs={12}>
+                                            <LineChart
+                                                coinHistory={prices}
+                                                coinName={coin.name}
                                             />
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid
-                                    item
-                                    xs={12}
-                                    md={3}
-                                    style={
-                                        {
-                                            // border: '1px solid blue',
-                                        }
-                                    }
-                                >
+                                <Grid item xs={12} md={3}>
                                     <Grid
                                         container
                                         direction={isMobile ? 'row' : 'column'}
@@ -271,143 +238,6 @@ const Cryptocurrency = () => {
                 </>
             )}
         </>
-        // <CheckLoad loading={loading} error={error} coin={coin}>
-        //     {coin.length > 0 && (
-        //         <Grid
-        //             container
-        //             direction={isMobile ? 'column' : 'row'}
-        //             className={classes.container}
-        //             style={{
-        //                 // border: '2px solid black',
-        //                 padding: 60,
-        //             }}
-        //         >
-        //             <Grid
-        //                 item
-        //                 xs={12}
-        //                 md={9}
-        //                 // style={{ border: '1px solid red' }}
-        //             >
-        //                 <Grid
-        //                     container
-        //                     item
-        //                     xs={6}
-        //                     alignItems="center"
-        //                     style={{
-        //                         // border: '1px solid red',
-        //                         marginBottom: 20,
-        //                     }}
-        //                 >
-        //                     <img src={coin.image.thumb} width="40" />
-        //                     <Typography style={{ marginLeft: 10 }}>
-        //                         {coin.name}
-        //                     </Typography>
-        //                 </Grid>
-        //                 <Grid
-        //                     container
-        //                     style={
-        //                         {
-        //                             // border: '1px solid red',
-        //                             // marginBottom: 20,
-        //                         }
-        //                     }
-        //                 >
-        //                     {/* HEADER */}
-        //                     <Grid
-        //                         item
-        //                         xs={12}
-        //                         style={{
-        //                             // border: '1px solid orange',
-        //                             marginBottom: 20,
-        //                         }}
-        //                     >
-        //                         <Grid
-        //                             container
-        //                             // style={{ marginBottom: 20 }}
-        //                         >
-        //                             <Grid item>
-        //                                 <Typography variant="h3">
-        //                                     {`$ ${coin.market_data.current_price.aud} `}
-        //                                 </Typography>
-        //                             </Grid>
-        //                             <Grid item style={{ paddingLeft: 10 }}>
-        //                                 <Typography variant="h6">
-        //                                     AUD
-        //                                 </Typography>
-        //                             </Grid>
-        //                         </Grid>
-        //                         <Grid
-        //                             item
-        //                             xs={12}
-        //                             style={{
-        //                                 // border: '1px solid orange',
-        //                                 color: 'green',
-        //                             }}
-        //                         >
-        //                             +1009.28 (+7.53%)
-        //                         </Grid>
-        //                     </Grid>
-
-        //                     {/* LINE CHART */}
-        //                     <Grid
-        //                         item
-        //                         xs={12}
-        //                         style={
-        //                             {
-        //                                 // border: '1px solid orange',
-        //                                 // height: 570,
-        //                                 // maxWidth: 1140,
-        //                             }
-        //                         }
-        //                     >
-        //                         <Line
-        //                             // height={'570px'}
-        //                             // width={'1140px'}
-        //                             data={chartData}
-        //                             options={options}
-        //                         />
-        //                     </Grid>
-        //                 </Grid>
-        //             </Grid>
-        //             <Grid
-        //                 item
-        //                 xs={12}
-        //                 md={3}
-        //                 style={
-        //                     {
-        //                         // border: '1px solid blue',
-        //                     }
-        //                 }
-        //             >
-        //                 <Grid
-        //                     container
-        //                     direction={isMobile ? 'row' : 'column'}
-        //                     justifyContent="space-evenly"
-        //                     alignItems="center"
-        //                     className={classes.detailsContainer}
-        //                 >
-        //                     {/* DETAILS */}
-        //                     <Grid
-        //                         item
-        //                         xs={4}
-        //                         md={6}
-        //                         className={classes.detailItem}
-        //                     >
-        //                         <BoxList data={coin} />
-        //                     </Grid>
-        //                     <Grid
-        //                         item
-        //                         xs={4}
-        //                         md={6}
-        //                         className={classes.detailItem}
-        //                     >
-        //                         <BoxList marketOrder={true} data={coin} />
-        //                     </Grid>
-        //                 </Grid>
-        //             </Grid>
-        //         </Grid>
-        //     )}
-        // </CheckLoad>
     )
 }
 
