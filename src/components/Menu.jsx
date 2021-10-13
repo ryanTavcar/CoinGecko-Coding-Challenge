@@ -1,10 +1,8 @@
 // REACT
 import React, { useState, useEffect } from 'react'
 
-// import { Link } from 'react-router-dom'
-
 // MATERIAL-UI
-import { Grid, Paper, Typography, Button } from '@material-ui/core'
+import { Grid, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 
@@ -12,32 +10,25 @@ import { useMediaQuery } from '@material-ui/core'
 import Alert from './Alert'
 import Filter from './Filter'
 import Preloader from './Preloader'
-import Pagination from './Pagination'
 import TableCryptoList from './TableCryptoList'
-import MosaicCryptoList from './MosaicCryptoList'
 import Trending from './Trending'
 
 // OTHER
 import { useCoinInfo } from '../state/zustand'
-import { handleLargeNumbers } from '../util/helper/helperFuctions'
-import useSearch from '../util/helper/useSearch'
-import CheckLoad from './common/CheckLoad'
 
 const useStyles = makeStyles((theme) => ({
     container: {
         padding: 10,
         overflowX: 'auto',
-        // border: '1px solid blue',
-        // height: '100%',
     },
 }))
 
 const Menu = () => {
-    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+    // const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
     const {
         marketCoins,
-        getMarketCoins,
-        getTrendingCoins,
+        fetchMarketDetails,
+        fetchTrendingCoins,
         trendingCoins,
         resetCoins,
         loading,
@@ -52,13 +43,8 @@ const Menu = () => {
     const [search, setSearch] = useState('')
 
     useEffect(() => {
-        resetCoins()
-        if ((!marketCoins && !trendingCoins) || currency) {
-            getMarketCoins(
-                `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-            )
-            getTrendingCoins('https://api.coingecko.com/api/v3/search/trending')
-        }
+        fetchMarketDetails(currency)
+        fetchTrendingCoins()
     }, [currency])
 
     // SEARCH
@@ -87,6 +73,12 @@ const Menu = () => {
             case 'trending':
                 return setIsMarket(false)
         }
+    }
+
+    if (loading) {
+        return <Preloader />
+    } else if (error) {
+        return <Alert variant="danger">{error}</Alert>
     }
 
     return (
@@ -156,13 +148,11 @@ const Menu = () => {
                     marginBottom: 20,
                 }}
             >
-                <CheckLoad loading={loading} error={error}>
-                    {isMarket ? (
-                        <TableCryptoList data={data} pageSize={pageSize} />
-                    ) : (
-                        <Trending data={trendingCoins} />
-                    )}
-                </CheckLoad>
+                {isMarket ? (
+                    <TableCryptoList data={data} pageSize={pageSize} />
+                ) : (
+                    <Trending data={trendingCoins} />
+                )}
             </Grid>
         </Grid>
     )

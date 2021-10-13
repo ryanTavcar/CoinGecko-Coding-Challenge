@@ -1,6 +1,12 @@
 import create from 'zustand'
 import axios from 'axios'
 
+const errorRepsonse = (error) => {
+    return error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+}
+
 export const useCoinInfo = create((set) => ({
     coin: {},
     marketCoins: [],
@@ -8,51 +14,47 @@ export const useCoinInfo = create((set) => ({
     prices: {},
     loading: true,
     error: null,
-    getPrices: async (url) => {
+    getPrices: async (coinId) => {
         try {
-            const { data } = await axios.get(url)
+            const { data } = await axios.get(
+                `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=aud&days=30&interval=daily`
+            )
             set({ prices: data })
         } catch (error) {
-            const message =
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message
+            const message = errorRepsonse(error)
             set({ error: message })
         }
     },
-    getCoin: async (url) => {
+    getCoin: async (coinId) => {
         try {
-            const { data } = await axios.get(url)
+            const { data } = await axios.get(
+                `https://api.coingecko.com/api/v3/coins/${coinId}`
+            )
             set({ coin: data, loading: false })
         } catch (error) {
-            const message =
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message
+            const message = errorRepsonse(error)
             set({ loading: false, error: message })
         }
     },
-    getMarketCoins: async (url) => {
+    fetchMarketDetails: async (currency) => {
         try {
-            const { data } = await axios.get(url)
+            const { data } = await axios.get(
+                `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+            )
             set({ marketCoins: data, loading: false })
         } catch (error) {
-            const message =
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message
+            const message = errorRepsonse(error)
             set({ loading: false, error: message })
         }
     },
-    getTrendingCoins: async (url) => {
+    fetchTrendingCoins: async () => {
         try {
-            const { data } = await axios.get(url)
+            const { data } = await axios.get(
+                'https://api.coingecko.com/api/v3/search/trending'
+            )
             set({ trendingCoins: data, loading: false })
         } catch (error) {
-            const message =
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message
+            const message = errorRepsonse(error)
             set({ loading: false, error: message })
         }
     },

@@ -58,69 +58,10 @@ const Cryptocurrency = () => {
 
     useEffect(() => {
         if (!coin || coin.id !== id || loading) {
-            getPrices(
-                `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=aud&days=30&interval=daily`
-            )
-            getCoin(`https://api.coingecko.com/api/v3/coins/${id}`)
+            getPrices(id)
+            getCoin(id)
         }
     }, [coin, id, pathname])
-
-    // let data = { index: [], price: [] }
-    // if (prices) {
-    //     for (const item of prices.prices) {
-    //         data.index.push(item[0])
-    //         data.price.push(item[1])
-    //     }
-    // }
-
-    // const chartData = (canvas) => {
-    //     const ctx = canvas.getContext('2d')
-    //     const gradient = ctx.createLinearGradient(0, 0, 0, 400)
-    //     gradient.addColorStop(0.5, 'rgba(46, 139, 192, 1)')
-    //     gradient.addColorStop(1, 'rgba(46, 139, 192, .4)')
-
-    //     let data = { index: [], price: [] }
-    //     for (const item of prices.prices) {
-    //         data.index.push(item[0])
-    //         data.price.push(item[1])
-    //     }
-
-    //     return {
-    //         labels: data.index.map((t) => new Date(t).toLocaleDateString()),
-    //         datasets: [
-    //             {
-    //                 label: 'Price in AUD',
-    //                 data: data.price.map((crypto) => crypto),
-    //                 fill: 'start',
-    //                 backgroundColor: gradient,
-    //                 borderColor: '#145DA0',
-    //                 borderWidth: 2,
-    //                 pointColor: '#fff',
-    //                 pointStrokeColor: '#ff6c23',
-    //                 pointHighlightFill: '#fff',
-    //                 pointHighlightStroke: '#ff6c23',
-    //             },
-    //         ],
-    //     }
-    // }
-
-    // const options = {
-    //     responsive: true,
-    //     maintainAspectRatio: true,
-    //     elements: {
-    //         point: {
-    //             radius: 0,
-    //         },
-    //     },
-    //     plugins: {
-    //         legend: {
-    //             display: false,
-    //         },
-    //         tooltips: {
-    //             enabled: false,
-    //         },
-    //     },
-    // }
 
     return (
         <>
