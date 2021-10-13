@@ -27,129 +27,115 @@ const Cryptocurrency = () => {
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
 
     useEffect(() => {
-        resetCoins()
-    }, [])
-
-    useEffect(() => {
+        console.log('second render')
         if (!coin || coin.id !== id || loading) {
             getPrices(id)
             getCoin(id)
         }
     }, [coin, id, pathname])
 
+    if (loading) {
+        return <Preloader />
+    } else if (error) {
+        return <Alert variant="danger">{error}</Alert>
+    }
+    // console.log(Object.keys(coin).length > 0)
     return (
         <>
-            {loading ? (
-                <Preloader />
-            ) : error ? (
-                <Alert variant="danger">{error}</Alert>
-            ) : (
+            {Object.keys(coin).length > 0 && (
                 <>
-                    {prices && (
-                        <>
+                    <Grid
+                        container
+                        direction={isMobile ? 'column' : 'row'}
+                        className={classes.container}
+                        style={{
+                            padding: 60,
+                        }}
+                    >
+                        <Grid item xs={12} md={9}>
                             <Grid
                                 container
-                                direction={isMobile ? 'column' : 'row'}
-                                className={classes.container}
+                                item
+                                xs={6}
+                                alignItems="center"
                                 style={{
-                                    padding: 60,
+                                    marginBottom: 20,
                                 }}
                             >
-                                <Grid item xs={12} md={9}>
+                                <img src={coin.image.thumb} width="40" />
+                                <Typography style={{ marginLeft: 10 }}>
+                                    {coin.name}
+                                </Typography>
+                            </Grid>
+                            <Grid container>
+                                {/* HEADER */}
+                                <Grid
+                                    item
+                                    xs={12}
+                                    style={{
+                                        marginBottom: 20,
+                                    }}
+                                >
+                                    <Grid container>
+                                        <Grid item>
+                                            <Typography variant="h3">
+                                                {`$ ${coin.market_data.current_price.aud} `}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item style={{ paddingLeft: 10 }}>
+                                            <Typography variant="h6">
+                                                AUD
+                                            </Typography>
+                                        </Grid>
+                                    </Grid>
                                     <Grid
-                                        container
                                         item
-                                        xs={6}
-                                        alignItems="center"
+                                        xs={12}
                                         style={{
-                                            marginBottom: 20,
+                                            color: 'green',
                                         }}
                                     >
-                                        <img
-                                            src={coin.image.thumb}
-                                            width="40"
-                                        />
-                                        <Typography style={{ marginLeft: 10 }}>
-                                            {coin.name}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid container>
-                                        {/* HEADER */}
-                                        <Grid
-                                            item
-                                            xs={12}
-                                            style={{
-                                                marginBottom: 20,
-                                            }}
-                                        >
-                                            <Grid container>
-                                                <Grid item>
-                                                    <Typography variant="h3">
-                                                        {`$ ${coin.market_data.current_price.aud} `}
-                                                    </Typography>
-                                                </Grid>
-                                                <Grid
-                                                    item
-                                                    style={{ paddingLeft: 10 }}
-                                                >
-                                                    <Typography variant="h6">
-                                                        AUD
-                                                    </Typography>
-                                                </Grid>
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                xs={12}
-                                                style={{
-                                                    color: 'green',
-                                                }}
-                                            >
-                                                +1009.28 (+7.53%)
-                                            </Grid>
-                                        </Grid>
-
-                                        {/* LINE CHART */}
-                                        <Grid item xs={12}>
-                                            <LineChart
-                                                coinHistory={prices}
-                                                coinName={coin.name}
-                                            />
-                                        </Grid>
+                                        +1009.28 (+7.53%)
                                     </Grid>
                                 </Grid>
-                                <Grid item xs={12} md={3}>
-                                    <Grid
-                                        container
-                                        direction={isMobile ? 'row' : 'column'}
-                                        justifyContent="space-evenly"
-                                        alignItems="center"
-                                        className={classes.detailsContainer}
-                                    >
-                                        {/* DETAILS */}
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            md={6}
-                                            className={classes.detailItem}
-                                        >
-                                            <BoxList data={coin} />
-                                        </Grid>
-                                        <Grid
-                                            item
-                                            xs={4}
-                                            md={6}
-                                            className={classes.detailItem}
-                                        >
-                                            <BoxList
-                                                marketOrder={true}
-                                                data={coin}
-                                            />
-                                        </Grid>
-                                    </Grid>
+
+                                {/* LINE CHART */}
+                                <Grid item xs={12}>
+                                    <LineChart
+                                        coinHistory={prices}
+                                        coinName={coin.name}
+                                    />
                                 </Grid>
                             </Grid>
-                        </>
-                    )}
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                            <Grid
+                                container
+                                direction={isMobile ? 'row' : 'column'}
+                                justifyContent="space-evenly"
+                                alignItems="center"
+                                className={classes.detailsContainer}
+                            >
+                                {/* DETAILS */}
+                                <Grid
+                                    item
+                                    xs={4}
+                                    md={6}
+                                    className={classes.detailItem}
+                                >
+                                    <BoxList data={coin} />
+                                </Grid>
+                                <Grid
+                                    item
+                                    xs={4}
+                                    md={6}
+                                    className={classes.detailItem}
+                                >
+                                    <BoxList marketOrder={true} data={coin} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </>
             )}
         </>
