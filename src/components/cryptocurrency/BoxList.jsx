@@ -2,38 +2,29 @@ import React, { useState } from 'react'
 
 // MATERIAL-UI
 import { Paper, Typography, Button, Grid, TextField } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        border: '1px solid grey',
-        // height: '15rem',
-    },
-    list: {
-        // display: 'flex',
-        // flexDirection: 'column',
-        padding: 0,
-        // border: '1px solid black',
-    },
-    listItem: {
-        display: 'flex',
-        height: '3rem',
-        padding: 15,
-        width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-}))
-const BoxList = ({ marketOrder, data }) => {
-    const classes = useStyles()
+// COMPONENTS
+import Popup from '../common/Popup'
 
+// OTHER
+import { useBoxListStyles } from './styles'
+import { useGeneralState } from '../../state/zustand'
+
+const BoxList = (props) => {
+    const { marketOrder, data } = props
+    const classes = useBoxListStyles()
+    const { isModalOpen, setIsModalOpen } = useGeneralState()
     const [shares, setShares] = useState(0)
 
     const handleSharesChange = (event) => {
         setShares(event.target.value)
     }
+
+    const handleModalOpen = () => setIsModalOpen()
+
     return (
         <>
+            <Popup isOpen={isModalOpen} />
             {marketOrder ? (
                 <Paper variant="outlined" className={classes.container}>
                     <Grid item xs={12} className={classes.listItem}>
@@ -103,6 +94,7 @@ const BoxList = ({ marketOrder, data }) => {
                         <Button
                             variant="contained"
                             color="secondary"
+                            onClick={handleModalOpen}
                             style={{ width: '100%' }}
                         >
                             <Typography
@@ -118,23 +110,23 @@ const BoxList = ({ marketOrder, data }) => {
                 <Paper variant="outlined" className={classes.container}>
                     <ul className={classes.list}>
                         <li className={classes.listItem}>
-                            <h6>open</h6>
-                            <h6>13.101.48</h6>
+                            <h4>rank</h4>
+                            <h4>{data.market_cap_rank}</h4>
                         </li>
 
                         <li className={classes.listItem}>
-                            <h6>open</h6>
-                            <h6>13.101.48</h6>
+                            <h4>max supply</h4>
+                            <h4>{data.market_data.max_supply}</h4>
                         </li>
 
                         <li className={classes.listItem}>
-                            <h6>open</h6>
-                            <h6>13.101.48</h6>
+                            <h4>high 24h</h4>
+                            <h4>{data.market_data.high_24h.aud}</h4>
                         </li>
 
                         <li className={classes.listItem}>
-                            <h6>open</h6>
-                            <h6>13.101.48</h6>
+                            <h4>low 24h</h4>
+                            <h4>{data.market_data.low_24h.aud}</h4>
                         </li>
                     </ul>
                 </Paper>

@@ -1,94 +1,37 @@
 // REACT
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 // MATERIAL-UI
-import { makeStyles } from '@material-ui/core/styles'
-import { Container, Grid, Paper, Typography } from '@material-ui/core'
-import { useMediaQuery } from '@material-ui/core'
-
-// COMPONENTS
-import Preloader from './Preloader'
-import Alert from './Alert'
-import { Line } from 'react-chartjs-2'
+import { Grid } from '@material-ui/core'
 
 // OTHER
-import { useTrending, useCoinInfo } from '../state/zustand'
-import linechart from '../images/linechart_demo.jpg'
-import { handleLargeNumbers } from '../util/helper/helperFuctions'
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        padding: 10,
-        overflow: 'hidden',
-        // border: '1px solid blue',
-        // height: '100%',
-    },
-    heading: {
-        fontFamily: 'Bungee',
-        // letterSpacing: 1,
-    },
-    trendingContainer: {
-        borderRadius: 10,
-        backgroundColor: '#d9dce3',
-        // border: '1px solid blue',
-        display: 'flex',
-        flexDirection: 'row',
-        // padding: 5,
-        // height: '10rem',
-        // width: '100%',
-        overflowX: 'scroll',
-    },
-    // '@global': {
-    //     '*::-webkit-scrollbar': {
-    //         height: '0.4em',
-    //     },
-
-    //     '*::-webkit-scrollbar-track': {
-    //         '-webkit-box-shadow': 'inset 0 0 6px rgba(0, 0, 0, 0.3)',
-    //     },
-
-    //     '*::-webkit-scrollbar-thumb': {
-    //         backgroundColor: '#2D4492',
-    //         borderRadius: '20px',
-    //     },
-    // },
-    trendingItem: {
-        // border: '1px solid blue',
-        // borderRadius: 10,
-        margin: 7,
-    },
-    logo: {
-        padding: 10,
-    },
-    title: {
-        padding: 10,
-    },
-    graph: {
-        padding: 10,
-    },
-}))
+import { handleLargeNumbers } from '../../util/helper/helperFuctions'
+import { useTableStyles } from './styles'
 
 const Trending = ({ data }) => {
-    const classes = useStyles()
+    const classes = useTableStyles()
     console.log(data)
 
     return (
         <>
-            <table className="table">
+            <table className={classes.table}>
                 <thead>
-                    <tr style={{ borderBottom: '5px solid #313F4F' }}>
-                        <th>NAME</th>
-                        <th>PRICE</th>
-                        <th>MARKET CAP</th>
-                        <th>TOTAL VOLUME</th>
-                        <th>SYMBOL</th>
+                    <tr
+                        className={classes.tableRow}
+                        style={{ borderBottom: '5px solid #313F4F' }}
+                    >
+                        <th className={classes.tableItem}>NAME</th>
+                        <th className={classes.tableItem}>PRICE</th>
+                        <th className={classes.tableItem}>MARKET CAP</th>
+                        <th className={classes.tableItem}>TOTAL VOLUME</th>
+                        <th className={classes.tableItem}>SYMBOL</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className={classes.tableRow}>
                     {data.coins.map((crypto) => (
                         <tr key={crypto.item.id}>
-                            <td>
+                            <td className={classes.tableItem}>
                                 <Grid container alignItems="center">
                                     <Grid item style={{ padding: 10 }}>
                                         <img
@@ -106,7 +49,7 @@ const Trending = ({ data }) => {
                                     </Grid>
                                 </Grid>
                             </td>
-                            <td>
+                            <td className={classes.tableItem}>
                                 <Grid container alignItems="center">
                                     <Grid item>
                                         ${' '}
@@ -114,13 +57,15 @@ const Trending = ({ data }) => {
                                     </Grid>
                                 </Grid>
                             </td>
-                            <td>
+                            <td className={classes.tableItem}>
                                 ${' '}
                                 {handleLargeNumbers(
                                     crypto.item.market_cap_rank
                                 )}
                             </td>
-                            <td>$ {handleLargeNumbers(crypto.item.score)}</td>
+                            <td className={classes.tableItem}>
+                                $ {handleLargeNumbers(crypto.item.score)}
+                            </td>
                             {/* <td>
                                     ${' '}
                                     {handleLargeNumbers(
@@ -128,7 +73,9 @@ const Trending = ({ data }) => {
                                     )}{' '}
                                     {crypto.item.symbol}
                                 </td> */}
-                            <td>{crypto.item.symbol}</td>
+                            <td className={classes.tableItem}>
+                                {crypto.item.symbol}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

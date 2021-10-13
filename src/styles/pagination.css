@@ -9,7 +9,6 @@
     text-align: center;
     margin: auto 8px;
     color: #313f4f;
-    /* color: rgba(0, 0, 0, 0.87); */
     display: flex;
     box-sizing: border-box;
     align-items: center;
@@ -29,14 +28,10 @@
 }
 .pagination-container .pagination-item.selected {
     background-color: #dbfb53;
-    /* background-color: rgba(0, 0, 0, 0.08); */
 }
 .pagination-container .pagination-item .arrow::before {
     position: relative;
-    /* top: 3pt;
-    Uncomment this to lower the icons as requested in comments*/
     content: '';
-    /* By using an em scale, the arrows will size with the font */
     display: inline-block;
     width: 0.4em;
     height: 0.4em;

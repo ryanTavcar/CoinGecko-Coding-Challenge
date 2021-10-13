@@ -1,14 +1,24 @@
+// REACT
 import React, { useState, useEffect, useMemo } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import clsx from 'clsx'
 import { Link } from 'react-router-dom'
-import { Grid, Typography } from '@material-ui/core'
-import { handleLargeNumbers } from '../util/helper/helperFuctions'
-import Pagination from './Pagination'
-import { useMediaQuery } from '@material-ui/core'
-// const PAGE_SIZE = 10;
 
-const TableCryptoList = ({ data, pageSize }) => {
+// MATERIAL-UI
+import { makeStyles } from '@material-ui/core/styles'
+import { Grid, Typography } from '@material-ui/core'
+import { useMediaQuery } from '@material-ui/core'
+
+// COMPONENTS
+import Pagination from '../pagination/Pagination'
+
+// OTHER
+import clsx from 'clsx'
+import { handleLargeNumbers } from '../../util/helper/helperFuctions'
+import { useTableStyles } from './styles'
+
+const TableCryptoList = (props) => {
+    const { data, pageSize } = props
+
+    const classes = useTableStyles()
     const [currentPage, setCurrentPage] = useState(1)
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
     const currentTableData = useMemo(() => {
@@ -19,23 +29,26 @@ const TableCryptoList = ({ data, pageSize }) => {
     })
 
     return (
-        <div>
-            <table className="table">
+        <div className={classes.tableContainer}>
+            <table className={classes.table}>
                 <thead>
-                    <tr style={{ borderBottom: '3px solid #313F4F' }}>
-                        <th>NAME</th>
-                        <th>PRICE</th>
-                        <th>MARKET CAP</th>
-                        <th>TOTAL VOLUME</th>
-                        <th>AVAILABLE SUPPLY</th>
-                        <th>SYMBOL</th>
+                    <tr
+                        className={classes.tableRow}
+                        style={{ borderBottom: '3px solid #313F4F' }}
+                    >
+                        <th className={classes.tableItem}>NAME</th>
+                        <th className={classes.tableItem}>PRICE</th>
+                        <th className={classes.tableItem}>MARKET CAP</th>
+                        <th className={classes.tableItem}>TOTAL VOLUME</th>
+                        <th className={classes.tableItem}>AVAILABLE SUPPLY</th>
+                        <th className={classes.tableItem}>SYMBOL</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {data.length > 0 &&
+                <tbody className={classes.tableRow}>
+                    {data &&
                         currentTableData.map((crypto) => (
                             <tr key={crypto.id}>
-                                <td>
+                                <td className={classes.tableItem}>
                                     <Grid container alignItems="center">
                                         <Grid item style={{ padding: 10 }}>
                                             <img
@@ -47,13 +60,14 @@ const TableCryptoList = ({ data, pageSize }) => {
                                         <Grid item>
                                             <Link
                                                 to={`/cryptocurrency/${crypto.id}`}
+                                                style={{ color: 'black' }}
                                             >
                                                 {crypto.name}
                                             </Link>
                                         </Grid>
                                     </Grid>
                                 </td>
-                                <td>
+                                <td className={classes.tableItem}>
                                     <Grid container alignItems="center">
                                         <Grid item>
                                             ${' '}
@@ -61,20 +75,22 @@ const TableCryptoList = ({ data, pageSize }) => {
                                         </Grid>
                                     </Grid>
                                 </td>
-                                <td>
+                                <td className={classes.tableItem}>
                                     $ {handleLargeNumbers(crypto.market_cap)}
                                 </td>
-                                <td>
+                                <td className={classes.tableItem}>
                                     $ {handleLargeNumbers(crypto.total_volume)}
                                 </td>
-                                <td>
+                                <td className={classes.tableItem}>
                                     ${' '}
                                     {handleLargeNumbers(
                                         crypto.circulating_supply
                                     )}{' '}
                                     {crypto.symbol}
                                 </td>
-                                <td>{crypto.symbol}</td>
+                                <td className={classes.tableItem}>
+                                    {crypto.symbol}
+                                </td>
                             </tr>
                         ))}
                 </tbody>

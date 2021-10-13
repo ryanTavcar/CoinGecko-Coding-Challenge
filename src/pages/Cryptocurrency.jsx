@@ -1,50 +1,24 @@
 // REACT
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
 // ZUSTAND
 import { useCoinInfo } from '../state/zustand'
 
 // COMPONENTS
-import Preloader from '../components/Preloader'
-import Alert from '../components/Alert'
-import LineChart from '../components/LineChart'
-import BoxList from '../components/BoxList'
+import Preloader from '../components/common/Preloader'
+import Alert from '../components/common/Alert'
+import LineChart from '../components/cryptocurrency/LineChart'
+import BoxList from '../components/cryptocurrency/BoxList'
 
 // MATERIAL-UI
-import { Grid, Paper, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { Grid, Typography } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
-import CheckLoad from '../components/common/CheckLoad'
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        padding: 0,
-        overflow: 'hidden',
-        // border: '1px solid blue',
-    },
-    header: {
-        // border: '1px solid red',
-    },
-    chart: {
-        // border: '1px solid blue',
-    },
-    detailsContainer: {
-        // border: '1px solid blue',
-        height: '100%',
-    },
-    detailItem: {
-        // border: '1px solid red',
-        minWidth: '18rem',
-        maxHeight: '10rem',
-        [theme.breakpoints.down('md')]: {
-            maxHeight: '40rem',
-            height: '16rem',
-        },
-    },
-}))
+// OTHER
+import { useCurrencyStyles } from './styles'
 
 const Cryptocurrency = () => {
-    const classes = useStyles()
+    const classes = useCurrencyStyles()
     const { id } = useParams()
     const { pathname } = useLocation()
     const { coin, getPrices, getCoin, prices, resetCoins, loading, error } =

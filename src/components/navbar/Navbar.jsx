@@ -1,8 +1,8 @@
+// REACT
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
-import MenuIcon from '@material-ui/icons/Menu'
-import { useGeneralState } from '../state/zustand'
+
+// MATERIAL-UI
 import {
     Box,
     Drawer,
@@ -20,6 +20,11 @@ import {
     AppBar,
     Modal,
 } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
+
+// OTHER
+import { useGeneralState } from '../../state/zustand'
+import { useNavbarStyles } from './styles'
 
 const menuItems = [
     {
@@ -30,66 +35,14 @@ const menuItems = [
         text: 'About',
         pathname: '/about',
     },
-    // {
-    //     text: 'Social',
-    //     pathname: '/social',
-    // },
 ]
 
-const useStyles = makeStyles((theme) => ({
-    navbar: {
-        // border: '1px solid red'
-        backgroundColor: '#eef2e0',
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
-    navlink: {
-        color: '#000',
-        cursor: 'pointer',
-        textDecoration: 'none',
-        'a:visited': {
-            color: '#000',
-        },
-    },
-    drawerPaper: {
-        width: 300,
-        background: '#F2F4F5',
-    },
-    drawerRoot: {
-        display: 'flex',
-        flexDirection: 'column',
-        toolbar: theme.mixins.toolbar,
-    },
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-    },
-    fontColor: {
-        color: '#000',
-    },
-    dividerColor: {
-        backgroundColor: '#000',
-    },
-    menuButton: {
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
-    },
-    linkContainer: {
-        // height: 20,
-    },
-}))
-
 const Navbar = () => {
-    const styles = useStyles()
+    const styles = useNavbarStyles()
     const drawer = Sidebar()
     const { setIsModalOpen } = useGeneralState()
     const [mobileOpen, setMobileOpen] = useState(false)
     const [container, setContainer] = useState(null)
-    const [isOpen, setisOpen] = useState(false)
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen)
@@ -240,7 +193,7 @@ const Navbar = () => {
 }
 
 const Sidebar = () => {
-    const styles = useStyles()
+    const styles = useNavbarStyles()
 
     return (
         <Box margin="8rem 1rem 0 1rem">
