@@ -1,44 +1,20 @@
-import { useMediaQuery } from '@material-ui/core'
+// REACT
+import React from 'react'
 import Link from 'react-router-dom'
-import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
-// import { BiRightArrowAlt } from 'react-icons/bi'
-import heroImage from '../images/green-hero-image2.png'
 import { AiOutlineArrowDown } from 'react-icons/ai'
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        // minHeight: 'calc(100vh - 170px)',
-        // border: '1px solid red',
-        width: '100%',
-        marginBottom: 150,
-        marginTop: 100,
-        [theme.breakpoints.down('xs')]: {
-            marginTop: 50,
-        },
-    },
-    title: {
-        fontFamily: 'Numans',
-        letterSpacing: 1,
-    },
-    subtitle: {
-        // height: '5rem',
-        paddingTop: '3rem',
-    },
-    textContainer: {
-        // border: '1px solid red',
-        [theme.breakpoints.down('sm')]: {
-            padding: 20,
-        },
-    },
-}))
+// MATERIAL-UI
+
+import { Container, Typography, Grid } from '@material-ui/core/'
+import { useMediaQuery } from '@material-ui/core'
+// COMPONENTS
+
+//OTHER
+import heroImage from '../../images/green-hero-image2.png'
+import { useHeroStyles } from './styles'
 
 const Hero = () => {
-    const classes = useStyles()
+    const classes = useHeroStyles()
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
 
     const scrollDown = () => {

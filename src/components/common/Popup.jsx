@@ -10,23 +10,11 @@ import {
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import { useGeneralState } from '../../state/zustand'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles((theme) => ({
-    modal: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 'fit-content',
-        display: 'flex',
-        justifyContent: 'center',
-    },
-}))
+import { useModalStyles } from './styles'
 
 const Popup = (props) => {
     const { isOpen } = props
-    const classes = useStyles()
+    const classes = useModalStyles()
     const { setIsModalOpen } = useGeneralState()
 
     const handleModalClose = () => setIsModalOpen()

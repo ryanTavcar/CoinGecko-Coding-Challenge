@@ -1,8 +1,8 @@
 import React from 'react'
-import { usePagination, DOTS } from '../util/helper/usePagination'
+import { usePagination, DOTS } from '../../util/helper/usePagination'
 import clsx from 'clsx'
 // import Slider from '@mui/material/Slider';
-import '../styles/pagination.css'
+import '../../styles/pagination.css'
 
 const Pagination = (props) => {
     const {

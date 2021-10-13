@@ -2,30 +2,12 @@ import React, { useState } from 'react'
 
 // MATERIAL-UI
 import { Paper, Typography, Button, Grid, TextField } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
-    container: {
-        border: '1px solid grey',
-        // height: '15rem',
-    },
-    list: {
-        // display: 'flex',
-        // flexDirection: 'column',
-        padding: 0,
-        // border: '1px solid black',
-    },
-    listItem: {
-        display: 'flex',
-        height: '3rem',
-        padding: 15,
-        width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-}))
-const BoxList = ({ marketOrder, data }) => {
-    const classes = useStyles()
+import { useBoxListStyles } from './styles'
+
+const BoxList = (props) => {
+    const { marketOrder, data } = props
+    const classes = useBoxListStyles()
 
     const [shares, setShares] = useState(0)
 

@@ -6,25 +6,9 @@ import {
     Select,
     TextField,
 } from '@mui/material'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        width: '6rem',
-        height: '2.5rem',
-        // border: '1px solid ' + theme.palette.secondary.main,
-    },
-    notchedOutline: {
-        // border: '1px solid ' + theme.palette.secondary.main + '!important',
-    },
-    input: {
-        height: '2.5rem',
-    },
-}))
+import { useFilterStyles } from './styles'
 
 const Filter = (props) => {
-    const classes = useStyles()
-    const ref = useRef()
     const {
         currency,
         setCurrency,
@@ -35,6 +19,7 @@ const Filter = (props) => {
         disable,
         searchbar,
     } = props
+    const classes = useFilterStyles()
 
     const handleCurrencyChange = (event) => {
         setCurrency(event.target.value)

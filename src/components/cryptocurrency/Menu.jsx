@@ -7,21 +7,15 @@ import { makeStyles } from '@material-ui/core/styles'
 import { useMediaQuery } from '@material-ui/core'
 
 // COMPONENTS
-import Alert from './Alert'
+import Alert from '../common/Alert'
 import Filter from './Filter'
-import Preloader from './Preloader'
+import Preloader from '../common/Preloader'
 import TableCryptoList from './TableCryptoList'
 import Trending from './Trending'
 
 // OTHER
-import { useCoinInfo } from '../state/zustand'
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        padding: 10,
-        overflowX: 'auto',
-    },
-}))
+import { useCoinInfo } from '../../state/zustand'
+import { useMenuStyles } from './styles'
 
 const Menu = () => {
     // const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
@@ -34,7 +28,7 @@ const Menu = () => {
         loading,
         error,
     } = useCoinInfo()
-    const classes = useStyles()
+    const classes = useMenuStyles()
     const [isMarket, setIsMarket] = useState(true)
 
     const [currency, setCurrency] = useState('AUD')

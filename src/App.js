@@ -1,43 +1,23 @@
 // REACT
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 // PAGES
-import Home from './Home'
-import About from './About'
-import Cryptocurrency from './Cryptocurrency'
+import Home from './pages/Home'
+import About from './pages/About'
+import Cryptocurrency from './pages/Cryptocurrency'
 
 // COMPONENTS
-import Navbar from '../components/Navbar'
+import Navbar from './components/navbar/Navbar'
 
 // MATERIAL-UI
 import { ThemeProvider } from '@material-ui/core/styles'
-import { lightTheme, darkTheme } from '../util/theme'
+import { lightTheme } from './util/theme'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { makeStyles } from '@material-ui/core/styles'
-import { Container, Grid, Typography } from '@material-ui/core'
-import { useMediaQuery } from '@material-ui/core'
 
 // OTHER
-import { useGeneralState } from '../state/zustand'
-
-const useStyles = makeStyles((theme) => ({
-    container: {
-        padding: 0,
-        overflow: 'hidden',
-        border: '1px solid purple',
-        display: 'flex',
-        height: '100vh',
-        [theme.breakpoints.down('sm')]: {
-            display: 'block',
-            height: '100%',
-        },
-    },
-}))
 
 function App() {
-    const classes = useStyles()
-
     return (
         <ThemeProvider theme={lightTheme}>
             <CssBaseline />
