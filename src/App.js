@@ -14,6 +14,7 @@ import Navbar from './components/navbar/Navbar'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { lightTheme } from './util/theme'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import Footer from './components/footer/Footer'
 
 // OTHER
 
@@ -22,10 +23,7 @@ function App() {
         <ThemeProvider theme={lightTheme}>
             <CssBaseline />
             <Router>
-                <Navbar
-                // lightOrDark={lightOrDark}
-                // handleLightOrDark={handleLightOrDark}
-                />
+                <Navbar />
 
                 <Switch>
                     <Route
@@ -40,6 +38,7 @@ function App() {
                         component={Cryptocurrency}
                     />
                 </Switch>
+                <Footer />
             </Router>
         </ThemeProvider>
     )

@@ -17,6 +17,7 @@ import { useTableStyles } from './styles'
 
 const TableCryptoList = (props) => {
     const { data, pageSize } = props
+
     const classes = useTableStyles()
     const [currentPage, setCurrentPage] = useState(1)
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
@@ -28,7 +29,7 @@ const TableCryptoList = (props) => {
     })
 
     return (
-        <div>
+        <div className={classes.tableContainer}>
             <table className={classes.table}>
                 <thead>
                     <tr
@@ -44,7 +45,7 @@ const TableCryptoList = (props) => {
                     </tr>
                 </thead>
                 <tbody className={classes.tableRow}>
-                    {data.length > 0 &&
+                    {data &&
                         currentTableData.map((crypto) => (
                             <tr key={crypto.id}>
                                 <td className={classes.tableItem}>
@@ -59,6 +60,7 @@ const TableCryptoList = (props) => {
                                         <Grid item>
                                             <Link
                                                 to={`/cryptocurrency/${crypto.id}`}
+                                                style={{ color: 'black' }}
                                             >
                                                 {crypto.name}
                                             </Link>

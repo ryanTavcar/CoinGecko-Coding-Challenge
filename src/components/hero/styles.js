@@ -21,4 +21,19 @@ export const useHeroStyles = makeStyles((theme) => ({
             padding: 20,
         },
     },
+    arrowCircle: {
+        zIndex: 1,
+        position: 'relative',
+        top: 70,
+        left: 5,
+        borderRadius: '50%',
+        width: 50,
+        height: 50,
+        backgroundColor: '#DBFB53',
+    },
+    arrowIcon: {
+        position: 'relative',
+        zIndex: 2,
+        cursor: 'pointer',
+    },
 }))

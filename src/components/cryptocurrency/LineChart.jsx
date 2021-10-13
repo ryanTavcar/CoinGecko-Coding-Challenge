@@ -2,12 +2,12 @@ import React from 'react'
 import { Line } from 'react-chartjs-2'
 
 const LineChart = (props) => {
-    const { coinHistory, currentPrice, coinName } = props
+    const { coinHistory } = props
     const coinPrice = []
     const coinTimestamp = []
 
     for (const item of coinHistory.prices) {
-        coinTimestamp.push(item[0])
+        coinTimestamp.push(new Date(item[0]).toLocaleDateString())
         coinPrice.push(item[1])
     }
 

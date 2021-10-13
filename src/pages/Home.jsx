@@ -25,17 +25,13 @@ const Home = () => {
             maxWidth={isMobile ? 'sm' : isLaptop ? 'md' : 'lg'}
             className={classes.container}
         >
-            {/* {isModalOpen && ( */}
-            <>
-                <Popup isOpen={isModalOpen} />
-                <Hero />
-                <Grid container direction="row" style={{ minHeight: '35rem' }}>
-                    <Grid item xs={12}>
-                        <Menu />
-                    </Grid>
+            <Popup isOpen={isModalOpen} />
+            <Hero />
+            <Grid container direction="row" style={{ minHeight: '35rem' }}>
+                <Grid item xs={12}>
+                    <Menu />
                 </Grid>
-            </>
-            {/* )} */}
+            </Grid>
         </Container>
     )
 }

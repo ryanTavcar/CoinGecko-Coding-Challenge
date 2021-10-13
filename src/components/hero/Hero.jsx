@@ -59,21 +59,9 @@ const Hero = () => {
                     </Typography>
                 </Grid>
                 <Grid item onClick={scrollDown} md={12}>
-                    <div
-                        style={{
-                            // border: '1px solid red',
-                            zIndex: 1,
-                            position: 'relative',
-                            top: 70,
-                            left: 5,
-                            borderRadius: '50%',
-                            width: 50,
-                            height: 50,
-                            backgroundColor: '#DBFB53',
-                        }}
-                    ></div>
+                    <div className={classes.arrowCircle}></div>
                     <AiOutlineArrowDown
-                        style={{ position: 'relative', zIndex: 2 }}
+                        className={classes.arrowIcon}
                         size={60}
                     />
                 </Grid>
@@ -82,8 +70,8 @@ const Hero = () => {
                 <img
                     src={heroImage}
                     alt="header image"
-                    width="500"
-                    height="500"
+                    width="600"
+                    height="600"
                 />
             </Grid>
         </Grid>

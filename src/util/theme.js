@@ -1,6 +1,5 @@
 import { createTheme } from '@material-ui/core/styles'
 
-// Create a theme instance.
 const lightTheme = createTheme({
     palette: {
         type: 'light',
@@ -27,18 +26,4 @@ const lightTheme = createTheme({
     },
 })
 
-const darkTheme = createTheme({
-    palette: {
-        type: 'dark',
-        primary: {
-            light: '#D9F5FF',
-            main: '#AF8DCE',
-            dark: '#0276aa',
-        },
-    },
-    typography: {
-        fontFamily: ['Prompt', 'sans-serif'].join(','),
-    },
-})
-
-export { lightTheme, darkTheme }
+export { lightTheme }

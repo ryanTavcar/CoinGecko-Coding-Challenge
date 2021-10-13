@@ -38,18 +38,34 @@ export const useFilterStyles = makeStyles((theme) => ({
 export const useMenuStyles = makeStyles((theme) => ({
     container: {
         padding: 10,
-        overflowX: 'auto',
     },
 }))
 export const useTableStyles = makeStyles((theme) => ({
+    tableContainer: {
+        overflowX: 'auto',
+        '&::-webkit-scrollbar': {
+            height: '0.6rem',
+        },
+        '&::-webkit-scrollbar-track': {
+            boxShadow: `inset 0 0 6px rgba(0, 0, 0, 0.3)`,
+        },
+        '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#313f4f',
+            outline: `1px solid slategrey`,
+        },
+    },
     table: {
         width: '100%',
         borderCollapse: 'collapse',
+        whiteSpace: 'nowrap',
     },
     tableRow: {
         borderBottom: '3px solid #313f4f',
     },
     tableItem: {
         textAlign: 'left',
+        [theme.breakpoints.down('xs')]: {
+            padding: '0px 10px',
+        },
     },
 }))
