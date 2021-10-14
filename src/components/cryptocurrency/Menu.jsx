@@ -38,7 +38,7 @@ const Menu = () => {
     useEffect(() => {
         fetchMarketDetails(currency)
         fetchTrendingCoins()
-    }, [currency])
+    }, [currency, fetchMarketDetails, fetchTrendingCoins])
 
     // SEARCH
     useEffect(() => {

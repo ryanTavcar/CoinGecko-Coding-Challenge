@@ -2,7 +2,7 @@
 import React from 'react'
 
 // MATERIAL-UI
-import { Container, Grid, Typography } from '@material-ui/core'
+import { Container, Grid } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
 
 // COMPONENTS

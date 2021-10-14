@@ -1,11 +1,10 @@
 // REACT
 import React from 'react'
-import Link from 'react-router-dom'
 import { AiOutlineArrowDown } from 'react-icons/ai'
 
 // MATERIAL-UI
 
-import { Container, Typography, Grid } from '@material-ui/core/'
+import { Typography, Grid } from '@material-ui/core/'
 import { useMediaQuery } from '@material-ui/core'
 // COMPONENTS
 
@@ -37,13 +36,7 @@ const Hero = () => {
                 justifyContent="space-between"
                 className={classes.textContainer}
             >
-                <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    // style={{ border: '1px solid red' }}
-                >
+                <Grid item xs={12} sm={12} md={12}>
                     <Typography
                         className={classes.title}
                         variant={isMobile ? 'h4' : 'h2'}
@@ -75,7 +68,7 @@ const Hero = () => {
             <Grid item container justifyContent="center" xs={12} md={6}>
                 <img
                     src={heroImage}
-                    alt="header image"
+                    alt="Hero"
                     width={isMobile ? '400px' : '600px'}
                     height={isMobile ? '400px' : '600px'}
                 />

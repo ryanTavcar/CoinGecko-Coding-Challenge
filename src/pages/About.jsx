@@ -3,12 +3,10 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
 // MATERIAL-UI
-import { Container, Grid, Typography } from '@material-ui/core'
+import { Container, Grid } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
 
 // COMPONENTS
-import Hero from '../components/hero/Hero'
-import Menu from '../components/cryptocurrency/Menu'
 import Popup from '../components/common/Popup'
 
 // OTHER

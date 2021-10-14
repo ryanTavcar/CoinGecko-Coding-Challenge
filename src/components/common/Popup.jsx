@@ -1,13 +1,5 @@
-import React, { useState } from 'react'
-import {
-    Grid,
-    Button,
-    IconButton,
-    Typography,
-    Popover,
-    Card,
-    Modal,
-} from '@material-ui/core'
+import React from 'react'
+import { Grid, IconButton, Typography, Card, Modal } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close'
 import { useGeneralState } from '../../state/zustand'
 import { useModalStyles } from './styles'
