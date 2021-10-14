@@ -19,6 +19,7 @@ import { useCoinInfo } from '../../state/zustand'
 import { useMenuStyles } from './styles'
 import { LineChart } from 'recharts'
 import { useTableStyles } from './styles'
+import componenetStepper from './componentStepper'
 
 const Menu = () => {
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
@@ -33,8 +34,7 @@ const Menu = () => {
     } = useCoinInfo()
     const classes = useTableStyles()
 
-    const [isMarket, setIsMarket] = useState(true)
-    // const [isChart, setIsChart] = useState(false)
+    const [componentTerm, setComponentTerm] = useState('market')
     const [currency, setCurrency] = useState('AUD')
     const [pageSize, setPageSize] = useState(10)
     const [data, setData] = useState([])
@@ -47,7 +47,7 @@ const Menu = () => {
 
     // SEARCH
     useEffect(() => {
-        if (isMarket && !loading) {
+        if (componentTerm === 'market' && !loading) {
             setData(marketCoins)
         }
 
@@ -64,14 +64,14 @@ const Menu = () => {
         }
     }, [search, marketCoins])
 
-    const hangleChangeComponent = (type) => {
-        switch (type) {
-            case 'market':
-                setIsMarket(true)
-                return
-            case 'trending':
-                setIsMarket(false)
-                return
+    const RenderComponent = () => {
+        switch (componentTerm) {
+            case componenetStepper.market:
+                return <TableCryptoList data={data} pageSize={pageSize} />
+            case componenetStepper.trending:
+                return <Trending data={trendingCoins} />
+            case componenetStepper.chart:
+                return <div>chart component here</div>
         }
     }
 
@@ -84,7 +84,7 @@ const Menu = () => {
     return (
         <Grid container className={classes.container}>
             {/* MENU BUTTONS */}
-            <MenuButtons onClick={hangleChangeComponent} />
+            <MenuButtons onClick={setComponentTerm} />
 
             {/* FILTER */}
             <Grid item xs={12} md={12}>
@@ -95,7 +95,7 @@ const Menu = () => {
                     setPageSize={setPageSize}
                     currency={currency}
                     setCurrency={setCurrency}
-                    disable={!isMarket}
+                    disable={componentTerm !== componenetStepper.market}
                 />
             </Grid>
 
@@ -107,11 +107,7 @@ const Menu = () => {
                     marginBottom: 20,
                 }}
             >
-                {isMarket ? (
-                    <TableCryptoList data={data} pageSize={pageSize} />
-                ) : (
-                    <Trending data={trendingCoins} />
-                )}
+                <RenderComponent />
             </Grid>
         </Grid>
     )

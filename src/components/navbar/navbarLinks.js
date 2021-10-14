@@ -1,6 +1,6 @@
 const menuItems = [
     {
-        text: 'Cyrptocurrencies',
+        text: 'Home',
         pathname: '/',
     },
     {
