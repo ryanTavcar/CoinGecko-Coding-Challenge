@@ -12,9 +12,11 @@ export const useCoinInfo = create((set) => ({
     marketCoins: [],
     trendingCoins: [],
     prices: {},
+    news: [],
     loading: true,
     error: null,
     getPrices: async (coinId) => {
+        set({ loading: true })
         try {
             const { data } = await axios.get(
                 `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=aud&days=30&interval=daily`
@@ -26,6 +28,7 @@ export const useCoinInfo = create((set) => ({
         }
     },
     getCoin: async (coinId) => {
+        set({ loading: true })
         try {
             const { data } = await axios.get(
                 `https://api.coingecko.com/api/v3/coins/${coinId}`
@@ -37,6 +40,7 @@ export const useCoinInfo = create((set) => ({
         }
     },
     fetchMarketDetails: async (currency) => {
+        set({ loading: true })
         try {
             const { data } = await axios.get(
                 `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
@@ -48,6 +52,7 @@ export const useCoinInfo = create((set) => ({
         }
     },
     fetchTrendingCoins: async () => {
+        set({ loading: true })
         try {
             const { data } = await axios.get(
                 'https://api.coingecko.com/api/v3/search/trending'
@@ -58,7 +63,18 @@ export const useCoinInfo = create((set) => ({
             set({ loading: false, error: message })
         }
     },
-
+    fetchNews: async () => {
+        set({ loading: true })
+        try {
+            const { data } = await axios.get(
+                'https://api.coingecko.com/api/v3/events?upcoming_events_only=false'
+            )
+            set({ news: data, loading: false })
+        } catch (error) {
+            const message = errorRepsonse(error)
+            set({ loading: false, error: message })
+        }
+    },
     resetCoins: () => {
         set({
             marketCoins: [],

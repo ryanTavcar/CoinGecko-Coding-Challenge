@@ -6,9 +6,7 @@ function Alert(props) {
     const classes = useAlertStyles()
 
     return (
-        <div
-            className={`${classes.alert} ${classes.alert}${variant || 'info'}`}
-        >
+        <div className={`alert alert-${variant.toLowerCase() || 'info'}`}>
             {props.children}
         </div>
     )

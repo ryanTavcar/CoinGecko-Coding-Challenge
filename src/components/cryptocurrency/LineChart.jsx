@@ -2,7 +2,8 @@ import React from 'react'
 import { Line } from 'react-chartjs-2'
 
 const LineChart = (props) => {
-    const { coinHistory } = props
+    const { coinHistory, currency } = props
+
     const coinPrice = []
     const coinTimestamp = []
 
@@ -15,11 +16,11 @@ const LineChart = (props) => {
         labels: coinTimestamp,
         datasets: [
             {
-                label: 'Price In AUD',
+                label: `Price In ${currency.toUpperCase()}`,
                 data: coinPrice,
-                fill: false,
-                backgroundColor: '#0071bd',
+                fill: 'false',
                 borderColor: '#0071bd',
+                borderWidth: 5,
             },
         ],
     }

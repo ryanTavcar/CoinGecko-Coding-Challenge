@@ -30,7 +30,7 @@ const Trending = ({ data }) => {
                 </thead>
                 <tbody className={classes.tableRow}>
                     {data.coins.map((crypto) => (
-                        <tr key={crypto.item.id}>
+                        <tr className={classes.bodyRow} key={crypto.item.id}>
                             <td className={classes.tableItem}>
                                 <Grid container alignItems="center">
                                     <Grid item style={{ padding: 10 }}>
