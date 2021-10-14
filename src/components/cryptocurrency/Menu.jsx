@@ -77,7 +77,7 @@ const Menu = () => {
     if (loading) {
         return <Preloader />
     } else if (error) {
-        return <Alert variant="danger">{error}</Alert>
+        return <Alert variant="Danger">{error}</Alert>
     }
 
     return (

@@ -1,6 +1,6 @@
 // REACT
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 // MATERIAL-UI
 import {
@@ -25,17 +25,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 // OTHER
 import { useGeneralState } from '../../state/zustand'
 import { useNavbarStyles } from './styles'
-
-const menuItems = [
-    {
-        text: 'Cyrptocurrencies',
-        pathname: '/',
-    },
-    {
-        text: 'About',
-        pathname: '/about',
-    },
-]
+import menuItems from './navbarLinks'
 
 const Navbar = () => {
     const styles = useNavbarStyles()
@@ -75,22 +65,7 @@ const Navbar = () => {
                             container
                             direction="row"
                             justifyContent="flex-end"
-                        >
-                            {/* <Grid item md={4} className={styles.linkContainer}>
-                                <Grid
-                                    container
-                                    direction="row"
-                                    justifyContent="flex-end"
-                                >
-                                    <Button
-                                        size="small"
-                                        onClick={() => handleLightOrDark()}
-                                    >
-                                        {lightOrDark}
-                                    </Button>
-                                </Grid>
-                            </Grid> */}
-                        </Grid>
+                        ></Grid>
                         <Drawer
                             container={container}
                             variant="temporary"
@@ -107,7 +82,7 @@ const Navbar = () => {
                     {/* tablet, laptop, desktop */}
                     <Hidden smDown>
                         <Grid item md={2} className={styles.linkContainer}>
-                            <Link to="/" className={styles.navlink}>
+                            <NavLink to="/" className={styles.navlink}>
                                 <Typography
                                     color="textPrimary"
                                     style={{
@@ -119,38 +94,53 @@ const Navbar = () => {
                                 >
                                     <b>Cryptograb</b>
                                 </Typography>
-                            </Link>
-                            {/* <Image src='/images/simflight_logo_transparent_1.png' width='100' height='32' /> */}
+                            </NavLink>
                         </Grid>
-                        <Grid item md={3} className={styles.linkContainer}>
-                            <Grid
+                        <Grid
+                            item
+                            md={3}
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                            className={styles.linkContainer}
+                        >
+                            {/* <Grid
                                 container
                                 direction="row"
                                 justifyContent="center"
-                            >
-                                {menuItems.map((item) => (
-                                    <Grid
-                                        item
-                                        key={item.text}
-                                        style={{
-                                            marginLeft: 15,
-                                            marginRight: 15,
-                                        }}
+                                alignItems="center"
+                                style={{ border: '1px solid blue' }}
+                            > */}
+                            {menuItems.map((item) => (
+                                <Grid
+                                    item
+                                    // xs={}
+                                    key={item.text}
+                                    style={{
+                                        marginLeft: 15,
+                                        marginRight: 15,
+                                        height: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <NavLink
+                                        to={item.pathname}
+                                        exact={true}
+                                        className={styles.navlink}
+                                        activeClassName="isActive"
                                     >
-                                        <Link
-                                            to={item.pathname}
-                                            className={styles.navlink}
+                                        <Typography
+                                            color="textPrimary"
+                                            className={styles.link}
                                         >
-                                            <Typography
-                                                color="textPrimary"
-                                                style={{ cursor: 'pointer' }}
-                                            >
-                                                {item.text}
-                                            </Typography>
-                                        </Link>
-                                    </Grid>
-                                ))}
-                            </Grid>
+                                            {item.text}
+                                        </Typography>
+                                    </NavLink>
+                                </Grid>
+                            ))}
+                            {/* </Grid> */}
                         </Grid>
 
                         <Grid item md={2} className={styles.linkContainer}>

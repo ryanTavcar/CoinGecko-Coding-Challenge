@@ -6,7 +6,9 @@ function Alert(props) {
     const classes = useAlertStyles()
 
     return (
-        <div className={(classes.alert, classes.alert`${variant || 'info'}`)}>
+        <div
+            className={`${classes.alert} ${classes.alert}${variant || 'info'}`}
+        >
             {props.children}
         </div>
     )

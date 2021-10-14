@@ -21,13 +21,11 @@ const Cryptocurrency = () => {
     const classes = useCurrencyStyles()
     const { id } = useParams()
     const { pathname } = useLocation()
-    const { coin, getPrices, getCoin, prices, resetCoins, loading, error } =
-        useCoinInfo()
+    const { coin, getPrices, getCoin, prices, loading, error } = useCoinInfo()
 
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
 
     useEffect(() => {
-        console.log('second render')
         if (!coin || coin.id !== id || loading) {
             getPrices(id)
             getCoin(id)
@@ -37,9 +35,8 @@ const Cryptocurrency = () => {
     if (loading) {
         return <Preloader />
     } else if (error) {
-        return <Alert variant="danger">{error}</Alert>
+        return <Alert variant="Danger">{error}</Alert>
     }
-    // console.log(Object.keys(coin).length > 0)
     return (
         <>
             {Object.keys(coin).length > 0 && (
@@ -48,9 +45,6 @@ const Cryptocurrency = () => {
                         container
                         direction={isMobile ? 'column' : 'row'}
                         className={classes.container}
-                        style={{
-                            padding: 60,
-                        }}
                     >
                         <Grid item xs={12} md={9}>
                             <Grid

@@ -17,7 +17,7 @@ import { useHomeStyles } from './styles'
 const Home = () => {
     const classes = useHomeStyles()
     const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-    const isLaptop = useMediaQuery((theme) => theme.breakpoints.down('md'))
+    const isLaptop = useMediaQuery((theme) => theme.breakpoints.between('md'))
     const { isModalOpen } = useGeneralState()
 
     return (

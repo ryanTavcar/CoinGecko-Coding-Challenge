@@ -14,9 +14,9 @@ export const useHomeStyles = makeStyles((theme) => ({
 
 export const useCurrencyStyles = makeStyles((theme) => ({
     container: {
-        padding: 0,
+        padding: 15,
+        height: '100%',
         overflow: 'hidden',
-        // border: '1px solid blue',
     },
     header: {
         // border: '1px solid red',
@@ -33,8 +33,8 @@ export const useCurrencyStyles = makeStyles((theme) => ({
         minWidth: '18rem',
         maxHeight: '10rem',
         [theme.breakpoints.down('md')]: {
-            maxHeight: '40rem',
-            height: '16rem',
+            minHeight: '18rem',
+            height: '15rem',
         },
     },
 }))

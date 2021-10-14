@@ -37,10 +37,16 @@ const Hero = () => {
                 justifyContent="space-between"
                 className={classes.textContainer}
             >
-                <Grid item md={12}>
+                <Grid
+                    item
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    // style={{ border: '1px solid red' }}
+                >
                     <Typography
                         className={classes.title}
-                        variant={isMobile ? 'h3' : 'h2'}
+                        variant={isMobile ? 'h4' : 'h2'}
                         component="h1"
                     >
                         <b>
@@ -70,8 +76,8 @@ const Hero = () => {
                 <img
                     src={heroImage}
                     alt="header image"
-                    width="600"
-                    height="600"
+                    width={isMobile ? '400px' : '600px'}
+                    height={isMobile ? '400px' : '600px'}
                 />
             </Grid>
         </Grid>
