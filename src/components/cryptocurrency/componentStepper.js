@@ -1,7 +1,7 @@
 const componenetStepper = {
     market: 'market',
     trending: 'trending',
-    chart: 'chart',
+    news: 'news',
 }
 
 export default componenetStepper

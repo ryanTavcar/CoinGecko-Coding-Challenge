@@ -5,16 +5,14 @@ import React, { useState } from 'react'
 import { Grid, Button } from '@material-ui/core'
 
 // OTHER
-import componenetStepper from '../cryptocurrency/componentStepper'
+import componenetStepper from './componentStepper'
 
 const MenuButtons = (props) => {
     const { onClick, selected } = props
 
-    // const [isActive, setIsActive] = useState(selected)
-
     const isMarket = selected === componenetStepper.market
     const isTrending = selected === componenetStepper.trending
-    const isChart = selected === componenetStepper.chart
+    const isNews = selected === componenetStepper.news
 
     return (
         <Grid
@@ -23,7 +21,6 @@ const MenuButtons = (props) => {
             container
             justifyContent="flex-start"
             style={{
-                // border: '1px solid red',
                 marginTop: 20,
                 marginBottom: 20,
             }}
@@ -52,10 +49,10 @@ const MenuButtons = (props) => {
                 <Button
                     style={{ width: '100%' }}
                     variant="contained"
-                    color={isChart ? 'primary' : 'secondary'}
-                    onClick={() => onClick('chart')}
+                    color={isNews ? 'primary' : 'secondary'}
+                    onClick={() => onClick('news')}
                 >
-                    Chart
+                    News
                 </Button>
             </Grid>
         </Grid>

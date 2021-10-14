@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react'
 
 // MATERIAL-UI
-import { Grid, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { useMediaQuery } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 
 // COMPONENTS
 import Alert from '../common/Alert'
@@ -12,13 +10,12 @@ import Filter from './Filter'
 import Preloader from '../common/Preloader'
 import TableCryptoList from './TableCryptoList'
 import Trending from './Trending'
-import MenuButtons from '../common/MenuButtons'
+import MenuButtons from './MenuButtons'
+import CryptoNews from './CryptoNews'
 
 // OTHER
 import { useCoinInfo } from '../../state/zustand'
 import { useMenuStyles } from './styles'
-import { LineChart } from 'recharts'
-import { useTableStyles } from './styles'
 import componenetStepper from './componentStepper'
 
 const Menu = () => {
@@ -30,7 +27,7 @@ const Menu = () => {
         loading,
         error,
     } = useCoinInfo()
-    const classes = useTableStyles()
+    const classes = useMenuStyles()
 
     const [componentTerm, setComponentTerm] = useState('market')
     const [currency, setCurrency] = useState('AUD')
@@ -68,15 +65,15 @@ const Menu = () => {
                 return <TableCryptoList data={data} pageSize={pageSize} />
             case componenetStepper.trending:
                 return <Trending data={trendingCoins} />
-            case componenetStepper.chart:
-                return <div>chart component here</div>
+            case componenetStepper.news:
+                return <CryptoNews pageSize={pageSize} />
         }
     }
 
     if (loading) {
         return <Preloader />
     } else if (error) {
-        return <Alert variant="Danger">{error}</Alert>
+        return <Alert variant="danger">{error}</Alert>
     }
 
     return (
@@ -93,7 +90,7 @@ const Menu = () => {
                     setPageSize={setPageSize}
                     currency={currency}
                     setCurrency={setCurrency}
-                    disable={componentTerm !== componenetStepper.market}
+                    selected={componentTerm}
                 />
             </Grid>
 
