@@ -18,9 +18,11 @@ import { useTableStyles } from './styles'
 const TableCryptoList = (props) => {
     const { data, pageSize } = props
 
+    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+
     const classes = useTableStyles()
     const [currentPage, setCurrentPage] = useState(1)
-    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+    console.log(data)
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize
         const lastPageIndex = firstPageIndex + pageSize
@@ -45,54 +47,51 @@ const TableCryptoList = (props) => {
                     </tr>
                 </thead>
                 <tbody className={classes.tableRow}>
-                    {data &&
-                        currentTableData.map((crypto) => (
-                            <tr key={crypto.id}>
-                                <td className={classes.tableItem}>
-                                    <Grid container alignItems="center">
-                                        <Grid item style={{ padding: 10 }}>
-                                            <img
-                                                src={crypto.image}
-                                                width={isMobile ? '30' : '40'}
-                                                alt={`${crypto.name} image`}
-                                            />
-                                        </Grid>
-                                        <Grid item>
-                                            <Link
-                                                to={`/cryptocurrency/${crypto.id}`}
-                                                style={{ color: 'black' }}
-                                            >
-                                                {crypto.name}
-                                            </Link>
-                                        </Grid>
+                    {currentTableData.map((crypto) => (
+                        <tr className={classes.bodyRow} key={crypto.id}>
+                            <td className={classes.tableItem}>
+                                <Grid container alignItems="center">
+                                    <Grid item style={{ padding: 10 }}>
+                                        <img
+                                            src={crypto.image}
+                                            width={isMobile ? '30' : '40'}
+                                            alt={`${crypto.name} image`}
+                                        />
                                     </Grid>
-                                </td>
-                                <td className={classes.tableItem}>
-                                    <Grid container alignItems="center">
-                                        <Grid item>
-                                            ${' '}
-                                            {crypto.current_price.toLocaleString()}
-                                        </Grid>
+                                    <Grid item>
+                                        <Link
+                                            to={`/cryptocurrency/${crypto.id}`}
+                                            style={{ color: 'black' }}
+                                        >
+                                            {crypto.name}
+                                        </Link>
                                     </Grid>
-                                </td>
-                                <td className={classes.tableItem}>
-                                    $ {handleLargeNumbers(crypto.market_cap)}
-                                </td>
-                                <td className={classes.tableItem}>
-                                    $ {handleLargeNumbers(crypto.total_volume)}
-                                </td>
-                                <td className={classes.tableItem}>
-                                    ${' '}
-                                    {handleLargeNumbers(
-                                        crypto.circulating_supply
-                                    )}{' '}
-                                    {crypto.symbol}
-                                </td>
-                                <td className={classes.tableItem}>
-                                    {crypto.symbol}
-                                </td>
-                            </tr>
-                        ))}
+                                </Grid>
+                            </td>
+                            <td className={classes.tableItem}>
+                                <Grid container alignItems="center">
+                                    <Grid item>
+                                        ${' '}
+                                        {crypto.current_price.toLocaleString()}
+                                    </Grid>
+                                </Grid>
+                            </td>
+                            <td className={classes.tableItem}>
+                                $ {handleLargeNumbers(crypto.market_cap)}
+                            </td>
+                            <td className={classes.tableItem}>
+                                $ {handleLargeNumbers(crypto.total_volume)}
+                            </td>
+                            <td className={classes.tableItem}>
+                                ${' '}
+                                {handleLargeNumbers(crypto.circulating_supply)}{' '}
+                                {crypto.symbol}
+                            </td>
+                            <td className={classes.tableItem}>
+                                {crypto.symbol}
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <Pagination

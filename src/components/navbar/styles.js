@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useNavbarStyles = makeStyles((theme) => ({
     navbar: {
-        // border: '1px solid red'
         backgroundColor: '#eef2e0',
     },
     menuButton: {
@@ -11,13 +10,8 @@ export const useNavbarStyles = makeStyles((theme) => ({
     title: {
         flexGrow: 1,
     },
-    navlink: {
-        color: '#000',
-        cursor: 'pointer',
-        textDecoration: 'none',
-        'a:visited': {
-            color: '#000',
-        },
+    drawer: {
+        // border: '1px solid red',
     },
     drawerPaper: {
         width: 300,
@@ -43,6 +37,20 @@ export const useNavbarStyles = makeStyles((theme) => ({
         },
     },
     linkContainer: {
-        // height: 20,
+        display: 'flex',
+        alignItems: 'center',
+        height: '62px',
+    },
+    navlink: {
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        textDecoration: 'none',
+        'a:visited': {
+            color: '#000',
+        },
+    },
+    link: {
+        letterSpacing: 0.5,
     },
 }))

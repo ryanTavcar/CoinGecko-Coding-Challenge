@@ -29,11 +29,28 @@ export const useHeroStyles = makeStyles((theme) => ({
         borderRadius: '50%',
         width: 50,
         height: 50,
-        backgroundColor: '#DBFB53',
+        backgroundColor: theme.palette.primary.main,
+        display: 'block',
+        animation: '$pulse 2s infinite',
     },
     arrowIcon: {
         position: 'relative',
         zIndex: 2,
         cursor: 'pointer',
+    },
+    '@keyframes pulse': {
+        '0%': {
+            zIndex: 1,
+            backgroundColor: theme.palette.primary.light,
+            boxShadow: ' 0 0 0 0 rgba(148, 216, 105, 1)',
+        },
+        '70%': {
+            zIndex: 1,
+            boxShadow: ' 0 0 0 10px rgba(148, 216, 105, 0)',
+        },
+        '100%': {
+            zIndex: 1,
+            boxShadow: ' 0 0 0 0 rgba(148, 216, 105, 0)',
+        },
     },
 }))

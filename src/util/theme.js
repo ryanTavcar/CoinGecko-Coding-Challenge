@@ -4,9 +4,9 @@ const lightTheme = createTheme({
     palette: {
         type: 'light',
         primary: {
-            light: '#D9F5FF',
+            light: '#b6d7a8',
             main: '#DBFB53',
-            dark: '#0276aa',
+            dark: '#5a8643',
         },
         secondary: {
             main: '#313F4F',
@@ -14,15 +14,6 @@ const lightTheme = createTheme({
     },
     typography: {
         fontFamily: ['Prompt', 'sans-serif'].join(','),
-    },
-    breakpoints: {
-        values: {
-            xs: 0,
-            sm: 600,
-            md: 960,
-            lg: 1280,
-            xl: 1920,
-        },
     },
 })
 
