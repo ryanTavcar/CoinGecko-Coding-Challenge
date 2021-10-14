@@ -22,7 +22,7 @@ const TableCryptoList = (props) => {
 
     const classes = useTableStyles()
     const [currentPage, setCurrentPage] = useState(1)
-    console.log(data)
+
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * pageSize
         const lastPageIndex = firstPageIndex + pageSize
