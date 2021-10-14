@@ -69,6 +69,7 @@ export const useCoinInfo = create((set) => ({
             const { data } = await axios.get(
                 'https://api.coingecko.com/api/v3/events?upcoming_events_only=false'
             )
+
             set({ news: data, loading: false })
         } catch (error) {
             const message = errorRepsonse(error)
