@@ -49,11 +49,14 @@ const Pagination = (props) => {
             >
                 <div className="arrow left" />
             </li>
-            {paginationRange.map((pageNumber) => {
+            {paginationRange.map((pageNumber, index) => {
                 // If the pageItem is a DOT, render the DOTS unicode character
                 if (pageNumber === DOTS) {
                     return (
-                        <li key={pageNumber} className="pagination-item dots">
+                        <li
+                            key={pageNumber + index}
+                            className="pagination-item dots"
+                        >
                             &#8230;
                         </li>
                     )

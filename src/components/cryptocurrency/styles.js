@@ -68,4 +68,9 @@ export const useTableStyles = makeStyles((theme) => ({
             padding: '0px 10px',
         },
     },
+    bodyRow: {
+        '&:nth-child(odd)': {
+            backgroundColor: '#b8c1b1', // third bg color
+        },
+    },
 }))

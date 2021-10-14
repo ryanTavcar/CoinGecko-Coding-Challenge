@@ -23,7 +23,7 @@ const Hero = () => {
                 top: window.screen.height,
                 behavior: 'smooth',
             })
-        }, 400)
+        }, 200)
     }
 
     return (
