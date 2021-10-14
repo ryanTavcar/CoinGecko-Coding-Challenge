@@ -30,10 +30,26 @@ export const useHeroStyles = makeStyles((theme) => ({
         width: 50,
         height: 50,
         backgroundColor: '#DBFB53',
+        display: 'block',
+        animation: '$pulse 2s infinite',
     },
     arrowIcon: {
         position: 'relative',
         zIndex: 2,
         cursor: 'pointer',
+    },
+    '@keyframes pulse': {
+        '0%': {
+            zIndex: 1,
+            boxShadow: ' 0 0 0 0 rgba(148, 216, 105, 0.8)',
+        },
+        '70%': {
+            zIndex: 1,
+            boxShadow: ' 0 0 0 10px rgba(148, 216, 105, 0)',
+        },
+        '100%': {
+            zIndex: 1,
+            boxShadow: ' 0 0 0 0 rgba(148, 216, 105, 0)',
+        },
     },
 }))

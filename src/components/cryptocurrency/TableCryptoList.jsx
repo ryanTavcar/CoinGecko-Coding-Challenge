@@ -28,7 +28,7 @@ const TableCryptoList = (props) => {
         const lastPageIndex = firstPageIndex + pageSize
 
         return data.slice(firstPageIndex, lastPageIndex)
-    }, [])
+    })
 
     return (
         <div className={classes.tableContainer}>
