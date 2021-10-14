@@ -16,9 +16,7 @@ import {
     Toolbar,
     IconButton,
     Grid,
-    Button,
     AppBar,
-    Modal,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 

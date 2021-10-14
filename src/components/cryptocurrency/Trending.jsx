@@ -11,7 +11,6 @@ import { useTableStyles } from './styles'
 
 const Trending = ({ data }) => {
     const classes = useTableStyles()
-    console.log(data)
 
     return (
         <>
@@ -37,7 +36,7 @@ const Trending = ({ data }) => {
                                         <img
                                             src={crypto.item.small}
                                             width="40"
-                                            alt={`${crypto.item.name} image`}
+                                            alt={`${crypto.item.name}`}
                                         />
                                     </Grid>
                                     <Grid item>

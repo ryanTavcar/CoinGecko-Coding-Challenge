@@ -1,17 +1,16 @@
 // REACT
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 // MATERIAL-UI
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
 
 // COMPONENTS
 import Pagination from '../pagination/Pagination'
 
 // OTHER
-import clsx from 'clsx'
+
 import { handleLargeNumbers } from '../../util/helper/helperFuctions'
 import { useTableStyles } from './styles'
 
@@ -28,7 +27,7 @@ const TableCryptoList = (props) => {
         const lastPageIndex = firstPageIndex + pageSize
 
         return data.slice(firstPageIndex, lastPageIndex)
-    })
+    }, [currentPage])
 
     return (
         <div className={classes.tableContainer}>
@@ -55,7 +54,7 @@ const TableCryptoList = (props) => {
                                         <img
                                             src={crypto.image}
                                             width={isMobile ? '30' : '40'}
-                                            alt={`${crypto.name} image`}
+                                            alt={`${crypto.name}`}
                                         />
                                     </Grid>
                                     <Grid item>

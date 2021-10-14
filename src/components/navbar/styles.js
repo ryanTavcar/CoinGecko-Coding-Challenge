@@ -4,9 +4,6 @@ export const useNavbarStyles = makeStyles((theme) => ({
     navbar: {
         backgroundColor: '#eef2e0',
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
     title: {
         flexGrow: 1,
     },

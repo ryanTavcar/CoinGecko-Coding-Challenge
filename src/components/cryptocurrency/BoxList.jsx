@@ -1,31 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 // MATERIAL-UI
-import { Paper, Typography, Button, Grid, TextField } from '@material-ui/core'
-
-// COMPONENTS
-import Popup from '../common/Popup'
+import { Typography, Grid } from '@material-ui/core'
 
 // OTHER
 import { useBoxListStyles } from './styles'
-import { useGeneralState } from '../../state/zustand'
 
 const BoxList = (props) => {
-    const { data, currency } = props
+    const { data } = props
     const classes = useBoxListStyles()
-    const { isModalOpen, setIsModalOpen } = useGeneralState()
-    const [shares, setShares] = useState(0)
-
-    const handleSharesChange = (event) => {
-        setShares(event.target.value)
-    }
-
-    const handleModalOpen = () => setIsModalOpen()
 
     return (
         <>
-            {/* <Popup isOpen={isModalOpen} /> */}
-
             <Grid item xs={12} className={classes.listItem}>
                 <Typography variant="subtitle1" color="textSecondary">
                     {data[0][0]}

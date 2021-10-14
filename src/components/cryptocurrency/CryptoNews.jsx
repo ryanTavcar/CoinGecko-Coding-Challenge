@@ -1,5 +1,5 @@
 // REACT
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // COMPONENTS
@@ -22,10 +22,9 @@ const CryptoNews = (props) => {
         if (news.length === 0 || loading) {
             fetchNews()
         }
-    }, [])
+    }, [fetchNews, loading])
 
     const currentNewsData = () => {
-        console.log(2)
         const firstPageIndex = (currentPage - 1) * pageSize
         const lastPageIndex = firstPageIndex + pageSize
         return news.data.slice(firstPageIndex, lastPageIndex)
@@ -43,7 +42,7 @@ const CryptoNews = (props) => {
                 <>
                     {currentNewsData().map((item) => (
                         <Paper
-                            key={item.id}
+                            key={item.website}
                             elevation={4}
                             style={{ margin: 10, padding: 10 }}
                         >
@@ -58,7 +57,7 @@ const CryptoNews = (props) => {
                                     <img
                                         src={item.screenshot}
                                         width="400"
-                                        alt={`${item.name} image`}
+                                        alt={`${item.title}`}
                                     />
                                 </Grid>
 
@@ -70,7 +69,9 @@ const CryptoNews = (props) => {
                                         <p>{item.description}</p>
                                     </Grid>
                                     <Grid item>
-                                        <Link>{item.website}</Link>
+                                        <Link to={item.website}>
+                                            {item.website}
+                                        </Link>
                                     </Grid>
                                 </Grid>
                             </Grid>

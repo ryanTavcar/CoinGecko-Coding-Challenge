@@ -18,7 +18,6 @@ import {
     MenuItem,
     FormControl,
     Select,
-    TextField,
     Container,
 } from '@material-ui/core'
 import { useMediaQuery } from '@material-ui/core'
@@ -44,22 +43,6 @@ const Cryptocurrency = () => {
             getCoin(id)
         }
     }, [coin, id, pathname])
-    console.log(coin)
-
-    const [percentageChange, setPercentageChange] = useState(0)
-
-    const handlepercentageChange = () => {
-        if (Object.keys(coin).length > 0) {
-            setPercentageChange(
-                coin.market_data.market_cap_change_percentage_24h
-            )
-        }
-        return
-    }
-
-    useEffect(() => {
-        handlepercentageChange()
-    }, [coin])
 
     if (loading) {
         return <Preloader />
@@ -72,7 +55,7 @@ const Cryptocurrency = () => {
             className={classes.container}
         >
             {Object.keys(coin).length > 0 && (
-                <Grid container>
+                <Grid container key={coin.id}>
                     {/* LEFT COLUMN */}
                     <Grid item md={8} container>
                         {/* COIN SYMBOL */}
