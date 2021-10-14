@@ -105,17 +105,9 @@ const Navbar = () => {
                             alignItems="center"
                             className={styles.linkContainer}
                         >
-                            {/* <Grid
-                                container
-                                direction="row"
-                                justifyContent="center"
-                                alignItems="center"
-                                style={{ border: '1px solid blue' }}
-                            > */}
                             {menuItems.map((item) => (
                                 <Grid
                                     item
-                                    // xs={}
                                     key={item.text}
                                     style={{
                                         marginLeft: 15,
@@ -140,7 +132,6 @@ const Navbar = () => {
                                     </NavLink>
                                 </Grid>
                             ))}
-                            {/* </Grid> */}
                         </Grid>
 
                         <Grid item md={2} className={styles.linkContainer}>
@@ -189,7 +180,7 @@ const Sidebar = () => {
         <Box margin="8rem 1rem 0 1rem">
             <div className={styles.toolbar}>
                 <Typography style={{ fontFamily: 'Bungee', letterSpacing: 1 }}>
-                    <b>Simflight</b>
+                    <b>Cryptograb</b>
                 </Typography>
                 <Divider className={styles.dividerColor} />
                 <Box marginTop="2rem">

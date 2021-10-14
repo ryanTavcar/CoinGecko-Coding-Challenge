@@ -22,12 +22,10 @@ import { useTableStyles } from './styles'
 import componenetStepper from './componentStepper'
 
 const Menu = () => {
-    const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'))
     const {
         marketCoins,
         fetchMarketDetails,
         fetchTrendingCoins,
-        getPrices,
         trendingCoins,
         loading,
         error,
@@ -84,7 +82,7 @@ const Menu = () => {
     return (
         <Grid container className={classes.container}>
             {/* MENU BUTTONS */}
-            <MenuButtons onClick={setComponentTerm} />
+            <MenuButtons onClick={setComponentTerm} selected={componentTerm} />
 
             {/* FILTER */}
             <Grid item xs={12} md={12}>
